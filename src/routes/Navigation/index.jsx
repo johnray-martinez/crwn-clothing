@@ -1,10 +1,20 @@
-import {Outlet} from 'react-router-dom';
+import {Fragment} from 'react';
+import {ReactComponent as CrownLogo} from '../../assets/logos/crown.svg';
+import {Outlet, Link} from 'react-router-dom';
 
 const Navigation = () => (
-  <div className='navigation'>
-    <h1>I AM THE NAVIGATIOn</h1>
+  <Fragment>
+    <div className='navigation'>
+      <div className='navigation__logo-container'>
+        <Link to='/'>
+          <CrownLogo />
+        </Link>
+      </div>
+      <div className='navigation__links-container'>
+      </div>    
+    </div>
     <Outlet />
-  </div>
+  </Fragment>
 );
 
 export default Navigation;
