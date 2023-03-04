@@ -1,12 +1,14 @@
 import CategoryList from '../../components/CategoryList';
 import './index.styles.scss';
 
-const LandingPage = () => {
+import {Outlet} from 'react-router-dom';
+
+const Home = () => {
   return(
-    <main className='landing-page'>
+    <main className='home'>
       <CategoryList />
     </main>
   )
 }
 
-export default LandingPage;
+export default Home;

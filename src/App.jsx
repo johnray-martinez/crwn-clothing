@@ -1,12 +1,14 @@
-import LandingPage from './pages/LandingPage';
+import {Routes, Route} from 'react-router-dom';
+import Navigation from './components/Navigation';
+import Home from './routes/Home';
 import './App.css';
 
-const App = () => {
-  return (
-    <div className="App">
-      <LandingPage />
-    </div>
-  );
-}
+const App = () => (
+  <Routes>
+    <Route path='/' element={<Navigation />}> 
+      <Route index element={<Home />} />
+    </Route>
+  </Routes>
+);
 
 export default App;
