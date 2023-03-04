@@ -1,12 +1,12 @@
 import CategoryList from '../../components/CategoryList';
 import './index.styles.scss';
 
-const LandingPage = () => {
+const Home = () => {
   return(
-    <main className='landing-page'>
+    <main className='home'>
       <CategoryList />
     </main>
   )
 }
 
-export default LandingPage;
+export default Home;
