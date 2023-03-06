@@ -39,45 +39,50 @@ const SignUpForm = () => {
   }
 
   return(
-    <form className='signup-form' onSubmit={submitHandler}>
-      <FormField
-        label='Display Name'
-        name='displayName' 
-        type="text" 
-        value={displayName} 
-        onChange={changeHandler} 
-        required 
-      />
+    <div className='signup-form__container'>
+      <h2>Don't have an account?</h2>
+      <p>Sign up with your email and password.</p>
+      <form className='signup-form' onSubmit={submitHandler}>
+        <FormField
+          label='Display Name'
+          name='displayName' 
+          type="text" 
+          value={displayName} 
+          onChange={changeHandler} 
+          required 
+        />
 
-      <FormField
-        label='Email'
-        name='email' 
-        type='email'
-        value={email} 
-        onChange={changeHandler} 
-        required 
-      />
+        <FormField
+          label='Email'
+          name='email' 
+          type='email'
+          value={email} 
+          onChange={changeHandler} 
+          required 
+        />
 
-      <FormField
-        label='Password'
-        name='password' 
-        type='password' 
-        value={password} 
-        onChange={changeHandler} 
-        required 
-      />
+        <FormField
+          label='Password'
+          name='password' 
+          type='password' 
+          value={password} 
+          onChange={changeHandler} 
+          required 
+        />
 
-      <FormField
-        label='Confirm Password'
-        name='confirmPassword' 
-        type='password'
-        value={confirmPassword} 
-        onChange={changeHandler} 
-        required 
-      />  
+        <FormField
+          label='Confirm Password'
+          name='confirmPassword' 
+          type='password'
+          value={confirmPassword} 
+          onChange={changeHandler} 
+          required 
+        />  
 
-      <button type='submit'>Submit</button>
-    </form>
+        <button type='submit'>Submit</button>
+      </form>
+    </div>
+
   );
 }
 
