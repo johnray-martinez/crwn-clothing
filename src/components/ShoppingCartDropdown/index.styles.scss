@@ -1,0 +1,14 @@
+.shopping-cart-dropdown {
+  height: 375px;
+  width: 300px;
+  border: 2px solid black;
+  padding: 12px;
+  position: absolute;
+  right: 0;
+  top: 90%;
+  background-color: white;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
