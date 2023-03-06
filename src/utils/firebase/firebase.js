@@ -4,7 +4,7 @@ import {
   signInWithPopup, 
   signInWithRedirect,
   GoogleAuthProvider, 
-  getRedirectResult
+  createUserWithEmailAndPassword
 } from 'firebase/auth';
 import {
   getFirestore,
@@ -61,4 +61,10 @@ export const createUserDocumentFromAuth = async (userAuth) => {
       console.error('error creating the user', error.message);
     }
   }
+}
+
+export const createUserDocumentWithEmailAndPassword = async (email, password) => {
+  if (!email || !password) return;
+
+  return await createUserWithEmailAndPassword(auth, email, password);
 }
