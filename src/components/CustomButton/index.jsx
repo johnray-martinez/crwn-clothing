@@ -6,7 +6,7 @@ const CustomButton = ({children, buttonType, ...attributes}) => {
     google: `${baseClass}--google`,
     inverted: `${baseClass}--inverted`,
   }
-  console.log(buttonType);
+
   return(
     <button {...attributes} className={`custom-button ${BUTTON_TYPE_CLASSES[buttonType]}`}>
       {children}
