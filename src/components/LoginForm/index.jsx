@@ -30,9 +30,7 @@ const LoginForm = () => {
     event.preventDefault();
     
     try {
-      const response = await signInUserWithEmailAndPassword(email, password);
-
-      // logged in
+      const { user } = await signInUserWithEmailAndPassword(email, password);
     } catch (err) {
       console.error(err.message);
     }
