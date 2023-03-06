@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { redirect } from 'react-router-dom';
 import { createUserDocumentWithEmailAndPassword, createUserDocumentFromAuth } from '../../utils/firebase/firebase';
 import FormField from '../FormField';
+import CustomButton from '../CustomButton';
 
 const SignUpForm = () => {
   const defaultFormFields = {
@@ -79,7 +80,7 @@ const SignUpForm = () => {
           required 
         />  
 
-        <button type='submit'>Submit</button>
+        <CustomButton type='submit'>Sign Up</CustomButton>
       </form>
     </div>
 
