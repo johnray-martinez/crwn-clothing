@@ -14,4 +14,9 @@
       color: lighten(#626767, 30%)
     }
   }
+
+  &__links-container {
+    display: flex;
+    grid-gap: 24px;
+  }
 }
