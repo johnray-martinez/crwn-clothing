@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { redirect } from 'react-router-dom';
 import { createUserDocumentWithEmailAndPassword, createUserDocumentFromAuth } from '../../utils/firebase/firebase';
+import FormField from '../FormField';
 
 const SignUpForm = () => {
   const defaultFormFields = {
@@ -39,17 +40,42 @@ const SignUpForm = () => {
 
   return(
     <form className='signup-form' onSubmit={submitHandler}>
-      <label>Display Name</label>
-      <input name='displayName' type="text" value={displayName} onChange={changeHandler} required />
+      <FormField
+        label='Display Name'
+        name='displayName' 
+        type="text" 
+        value={displayName} 
+        onChange={changeHandler} 
+        required 
+      />
 
-      <label>Email</label>
-      <input name='email' type="email" value={email} onChange={changeHandler} required />
+      <FormField
+        label='Email'
+        name='email' 
+        type='email'
+        value={email} 
+        onChange={changeHandler} 
+        required 
+      />
 
-      <label>Password</label>
-      <input name='password' type="password" value={password} onChange={changeHandler} required />
+      <FormField
+        label='Password'
+        name='password' 
+        type='password' 
+        value={password} 
+        onChange={changeHandler} 
+        required 
+      />
 
-      <label>Confirm Password</label>
-      <input name='confirmPassword' type="password" value={confirmPassword} onChange={changeHandler} required/>
+      <FormField
+        label='Confirm Password'
+        name='confirmPassword' 
+        type='password'
+        value={confirmPassword} 
+        onChange={changeHandler} 
+        required 
+      />  
+
       <button type='submit'>Submit</button>
     </form>
   );
