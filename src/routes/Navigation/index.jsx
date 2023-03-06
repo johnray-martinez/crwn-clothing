@@ -3,10 +3,13 @@ import { ReactComponent as CrownLogo } from '../../assets/logos/crown.svg';
 import { Outlet, Link } from 'react-router-dom';
 import { UserContext } from '../../context/user';
 import { signOutUser } from '../../utils/firebase/firebase';
+import ShoppingCartIcon from '../../components/ShoppingCartIcon';
 import './index.styles.scss';
+import { CartContext } from '../../context/cart';
 
 const Navigation = () => {
   const { currentUser } = useContext(UserContext);
+  const { cart } = useContext(CartContext);
   
   const signOutHandler = async () => {
     await signOutUser();
@@ -33,6 +36,7 @@ const Navigation = () => {
           </Link>
         : <span className='navigation__link' onClick={signOutHandler}>SIGN OUT</span>
        }
+       <ShoppingCartIcon itemCount={cart.length}/>
        
       </div>    
     </div>
