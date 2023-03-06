@@ -1,9 +1,10 @@
-import { useState } from 'react'; 
+import { useState, useContext } from 'react'; 
 import { 
   signInWithGooglePopup, 
   createUserDocumentFromAuth,
   signInUserWithEmailAndPassword
 } from '../../utils/firebase/firebase';
+import { UserContext } from '../../context/user';
 import FormField from '../FormField';
 import CustomButton from '../CustomButton';
 
@@ -16,6 +17,9 @@ const LoginForm = () => {
 
   // STATE SETUP
   const [fieldValues, setFieldValues] = useState(defaultFieldValues);
+
+  // CONTEXT
+  const { setCurrentUser } = useContext(UserContext);
 
   // DESTRUCTURED STATE
   const {email, password} = fieldValues;
@@ -30,9 +34,8 @@ const LoginForm = () => {
     event.preventDefault();
     
     try {
-      const response = await signInUserWithEmailAndPassword(email, password);
-
-      // logged in
+      const { user } = await signInUserWithEmailAndPassword(email, password);
+      setCurrentUser(user);
     } catch (err) {
       console.error(err.message);
     }

@@ -1,10 +1,14 @@
-import {Fragment} from 'react';
-import {ReactComponent as CrownLogo} from '../../assets/logos/crown.svg';
-import {Outlet, Link} from 'react-router-dom';
+import { Fragment, useContext } from 'react';
+import { ReactComponent as CrownLogo } from '../../assets/logos/crown.svg';
+import { Outlet, Link } from 'react-router-dom';
+import { UserContext } from '../../context/user';
 import './index.styles.scss';
 
-const Navigation = () => (
-  <Fragment>
+const Navigation = () => {
+  const { currentUser } = useContext(UserContext);
+  console.log(currentUser);
+  return (
+    <Fragment>
     <div className='navigation'>
       <div className='navigation__logo-container'>
         <Link to='/'>
@@ -19,12 +23,12 @@ const Navigation = () => (
           CONTACT
         </Link>
         <Link className='navigation__link' to='/sign-in'>
-          SIGN IN
+          {currentUser ? 'SIGN OUT' : 'SIGN IN'}
         </Link>
       </div>    
     </div>
     <Outlet />
   </Fragment>
-);
+)};
 
 export default Navigation;
