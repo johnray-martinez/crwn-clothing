@@ -4,7 +4,7 @@
   flex-basis: 30%;
   flex-grow: 1;
   overflow: hidden;
-  height: 240px;
+  border: 2px solid black;
 
   &:hover &__content-container {
     background-color: rgba(255, 255,255, 1);
