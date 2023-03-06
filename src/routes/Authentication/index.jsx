@@ -1,13 +1,13 @@
 import SignUpForm from '../../components/SignUpForm';
 import LoginForm from '../../components/LoginForm';
 
-const SignIn = () => {
+const Authentication = () => {
   return (
-    <div className='sign-in'>
-      {/* <SignUpForm /> */}
+    <div className='authentication'>
+      <SignUpForm />
       <LoginForm />
     </div>
   );
 }
 
-export default SignIn;
+export default Authentication;

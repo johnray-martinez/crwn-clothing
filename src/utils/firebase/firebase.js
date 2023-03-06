@@ -3,6 +3,7 @@ import {
   getAuth, 
   signInWithPopup, 
   GoogleAuthProvider, 
+  signInWithEmailAndPassword,
   createUserWithEmailAndPassword
 } from 'firebase/auth';
 import {
@@ -35,11 +36,13 @@ googleProvider.setCustomParameters({
   prompt: 'select_account'
 });
 
+// required firestore variables
 export const auth = getAuth();
-export const signInWithGooglePopup = () => signInWithPopup(auth, googleProvider);
 export const db = getFirestore();
 
-// user creation
+
+export const signInWithGooglePopup = () => signInWithPopup(auth, googleProvider);
+
 export const createUserDocumentFromAuth = async (userAuth) => {
   const userDocRef = doc(db, 'users', userAuth.uid);
   const userSnapshot = await getDoc(userDocRef)
@@ -64,4 +67,10 @@ export const createUserDocumentWithEmailAndPassword = async (email, password) =>
   if (!email || !password) return;
 
   return await createUserWithEmailAndPassword(auth, email, password);
+}
+
+export const signInUserWithEmailAndPassword = async (email, password) => {
+  if (!email || !password) return;
+
+  return await signInWithEmailAndPassword(auth, email, password);
 }

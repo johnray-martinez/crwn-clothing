@@ -1,7 +1,8 @@
 import { useState } from 'react'; 
 import { 
   signInWithGooglePopup, 
-  createUserDocumentFromAuth 
+  createUserDocumentFromAuth,
+  signInUserWithEmailAndPassword
 } from '../../utils/firebase/firebase';
 import FormField from '../FormField';
 import CustomButton from '../CustomButton';
@@ -16,6 +17,8 @@ const LoginForm = () => {
   // STATE SETUP
   const [fieldValues, setFieldValues] = useState(defaultFieldValues);
 
+  // DESTRUCTURED STATE
+  const {email, password} = fieldValues;
 
   // HELPERS
   const changeHandler = (event) => {
@@ -23,9 +26,16 @@ const LoginForm = () => {
     setFieldValues({...fieldValues, [name]: value});
   }
 
-  const submitHandler = (event) => {
+  const submitHandler = async (event) => {
     event.preventDefault();
     
+    try {
+      const response = await signInUserWithEmailAndPassword(email, password);
+
+      // logged in
+    } catch (err) {
+      console.error(err.message);
+    }
   }
 
   const logGoogleUser = async () => {
@@ -33,11 +43,9 @@ const LoginForm = () => {
     createUserDocumentFromAuth(response.user);
   }
 
-  // DESTRUCTURED STATE
-  const {email, password} = fieldValues;
   return(
     <div className='login-form__container'>
-      <h2>I already have an account</h2>
+      <h2>Already have an account?</h2>
       <p>Sign in with your email and password</p>
 
       <form className='login-form' onSubmit={submitHandler}>
