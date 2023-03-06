@@ -1,9 +1,8 @@
-import { useState, useContext } from 'react';
+import { useState } from 'react';
 import { redirect } from 'react-router-dom';
 import { createUserDocumentWithEmailAndPassword, createUserDocumentFromAuth } from '../../utils/firebase/firebase';
 import FormField from '../FormField';
 import CustomButton from '../CustomButton';
-import { UserContext } from '../../context/user';
 
 const SignUpForm = () => {
   const defaultFormFields = {
@@ -13,7 +12,6 @@ const SignUpForm = () => {
     confirmPassword: ''
   }
   const [formFields, setFormFields] = useState(defaultFormFields);
-  const { setCurrentUser } = useContext(UserContext);
   const { displayName, email, password, confirmPassword } = formFields;
 
   const changeHandler = (event) => {
@@ -33,7 +31,6 @@ const SignUpForm = () => {
     try {
       const {user} = await createUserDocumentWithEmailAndPassword(email, password);
       await createUserDocumentFromAuth({...user, displayName});
-      setCurrentUser(user);
 
       return redirect('/');
 
