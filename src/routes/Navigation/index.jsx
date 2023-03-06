@@ -18,7 +18,7 @@ const Navigation = () => (
         <Link className='navigation__link' to='/contact'>
           CONTACT
         </Link>
-        <Link className='navigation__link' to='/sign'>
+        <Link className='navigation__link' to='/sign-in'>
           SIGN IN
         </Link>
       </div>    
