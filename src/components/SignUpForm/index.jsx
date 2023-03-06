@@ -34,11 +34,11 @@ const SignUpForm = () => {
       const {user} = await createUserDocumentWithEmailAndPassword(email, password);
       await createUserDocumentFromAuth({...user, displayName});
       setCurrentUser(user);
-      
+
       return redirect('/');
 
     } catch (err) {
-      console.log(err.message);
+      console.error(err.message);
     }
   }
 
