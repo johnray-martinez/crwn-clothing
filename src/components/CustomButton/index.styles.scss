@@ -24,4 +24,10 @@ $off-color: white;
   &:hover {
     @include defaultInverted;
   }
+
+  &--google {
+    background-color: $google-color;
+    color: $off-color;
+    border: 1px solid black;
+  }
 }
