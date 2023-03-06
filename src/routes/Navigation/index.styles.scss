@@ -9,6 +9,7 @@
     text-decoration: none; 
     font-weight: 600;
     transition: 0.3s;
+    cursor: pointer;
 
     &:hover {
       color: lighten(#626767, 30%)
