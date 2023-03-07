@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import CustomButton from '../CustomButton';
 import './index.styles.scss';
 
@@ -17,7 +18,9 @@ const ShoppingCartDropdown = ({productList}) => {
           </div>
         })}
       </div>
-      <CustomButton>Go to Checkout</CustomButton>
+      <Link to='/checkout'>
+        <CustomButton>Go to Checkout</CustomButton>
+      </Link>
     </div>
   )
 }
