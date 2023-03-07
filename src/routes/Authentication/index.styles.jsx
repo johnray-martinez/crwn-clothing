@@ -17,8 +17,8 @@ export const Container = styled.div`
   margin: 0 auto;
   grid-gap: 42px;
   
-  ${SignUpForm},
-  ${LoginForm} {
+  ${SignUp},
+  ${Login} {
     flex-basis: 50%;
   }
 `;
