@@ -1,11 +1,15 @@
-import './index.styles.scss';
+import { 
+  FieldContainer,
+  Field,
+  Label
+} from './index.styles.jsx';
 
 const FormField = ({label, ...attributes}) => {
   return (
-    <div className='form-field'>
-      <input {...attributes} />
-      {label && <label className={`form-field__label ${attributes.value ? 'shrink' : ''}`}>{label}</label>}
-    </div>
+    <FieldContainer>
+      <Field {...attributes} />
+      {label && <Label shrink={(attributes.value ? 'shrink' : '')}>{label}</Label>}
+    </FieldContainer>
   );
 }
 
