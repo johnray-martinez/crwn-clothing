@@ -4,7 +4,7 @@ import { createUserDocumentWithEmailAndPassword, createUserDocumentFromAuth } fr
 import FormField from '../FormField';
 import CustomButton from '../CustomButton';
 
-const SignUpForm = () => {
+const SignUpForm = ({className}) => {
   const defaultFormFields = {
     displayName: '',
     email: '',
@@ -40,10 +40,10 @@ const SignUpForm = () => {
   }
 
   return(
-    <div className='signup-form__container'>
+    <div className={className}>
       <h2>Don't have an account?</h2>
       <p>Sign up with your email and password</p>
-      <form className='signup-form' onSubmit={submitHandler}>
+      <form onSubmit={submitHandler}>
         <FormField
           label='Display Name'
           name='displayName' 

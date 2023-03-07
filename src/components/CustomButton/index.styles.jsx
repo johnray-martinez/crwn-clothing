@@ -47,6 +47,8 @@ export const Button = styled.button`
           ${invertedHover}
         }
       `;
+
+      default: return ``
     }
   }}
 `;

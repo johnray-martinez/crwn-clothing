@@ -33,9 +33,9 @@ const Navigation = () => {
           <NavigationLink to='/shop'>
             SHOP
           </NavigationLink>
-          <NavigationLink to='/contact'>
+          {/* <NavigationLink to='/contact'>
             CONTACT
-          </NavigationLink>
+          </NavigationLink> */}
           { !currentUser ? 
             <NavigationLink to='/sign-in'>
             SIGN IN

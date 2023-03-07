@@ -1,12 +1,15 @@
-import SignUpForm from '../../components/SignUpForm';
-import LoginForm from '../../components/LoginForm';
+import {
+  SignUp,
+  Login,
+  Container
+} from './index.styles';
 
 const Authentication = () => {
   return (
-    <div className='authentication'>
-      <SignUpForm />
-      <LoginForm />
-    </div>
+    <Container>
+      <Login />
+      <SignUp />
+    </Container>
   );
 }
 
