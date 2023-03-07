@@ -4,9 +4,19 @@
     margin: 0 auto;
   }
 
+  &__table-total {
+    font-size: 32px;
+    font-weight: 700;
+  }
+
   &__table-control {
     cursor: pointer;
     font-weight: 700;
+    transition: 0.3s;
+
+    &:hover {
+      color: red;
+    }
   }
 
   &__table-row {
@@ -14,10 +24,20 @@
     grid-gap: 12px;
     border-bottom: 2px solid black;
     padding: 24px 0;
+    align-items: center;
 
     &--header {
       border-bottom: 2px solid black;
       font-size: 18px;
+      font-weight: 700;
+    }
+
+    &--no-border {
+      border: none;
+    }
+
+    &--right-align {
+      justify-content: flex-end;
     }
 
     > * {
