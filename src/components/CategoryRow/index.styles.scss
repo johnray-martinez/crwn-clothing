@@ -1,0 +1,12 @@
+.category-row {
+  &__product-list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 8px;
+  }
+  
+  &__category-title {
+    font-size: 32px;
+    font-weight: 700;
+  }
+}
