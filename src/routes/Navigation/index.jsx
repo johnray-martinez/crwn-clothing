@@ -10,7 +10,7 @@ import { CartContext } from '../../context/cart';
 
 const Navigation = () => {
   const { currentUser } = useContext(UserContext);
-  const { cart, showDropdown } = useContext(CartContext);
+  const { cart, totalItemsInCart, showDropdown } = useContext(CartContext);
   
   const signOutHandler = async () => {
     await signOutUser();
@@ -37,10 +37,9 @@ const Navigation = () => {
             </Link>
           : <span className='navigation__link' onClick={signOutHandler}>SIGN OUT</span>
           }
-          <ShoppingCartIcon itemCount={cart.length}/>
+          <ShoppingCartIcon itemCount={totalItemsInCart}/>
         </div>   
-        { showDropdown && <ShoppingCartDropdown /> }
-        
+        { showDropdown && <ShoppingCartDropdown productList={[...cart.values()]} /> }
       </div>
     <Outlet />
   </Fragment>
