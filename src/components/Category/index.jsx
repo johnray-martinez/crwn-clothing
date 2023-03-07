@@ -1,17 +1,23 @@
 import { Link } from 'react-router-dom';
-import './index.styles.scss';
+import {
+  Container,
+  Background,
+  TextContainer,
+  Text,
+  Title
+} from './index.styles.jsx';
 
 const Category = ({title, imageUrl,}) => {
   return (
-    <div className='category'>
+    <Container>
       <Link to={`/shop/${title}`}>
-        <img className='category__bg' src={imageUrl} alt={title}/>
-        <div className='category__content-container'>
-          <h2 className='category__title'>{title}</h2>
-          <p className='category__subtitle'>Shop Now</p>
-        </div>
+        <Background src={imageUrl} alt={title}/>
+        <TextContainer>
+          <Title as='h2'>{title}</Title>
+          <Text>Shop Now</Text>
+        </TextContainer>
       </Link>
-    </div>
+    </Container>
   );
 }
 
