@@ -8,14 +8,16 @@ import {
   Thumbnail,
   TextContainer,  
   Text,
-  CheckoutButton
+  CheckoutButton,
+  EmptyMessage
 } from './index.styles.jsx';
 
 const ShoppingCartDropdown = ({productList}) => {
   return(
     <Container>
       <List>
-        {productList.map((product, i) => {
+        {productList.length ? 
+          productList.map((product, i) => {
           const {name, quantity, imageUrl, price} = product;
 
           return <ListItem key={i}>
@@ -27,7 +29,8 @@ const ShoppingCartDropdown = ({productList}) => {
               <Text>{quantity} X ${price}</Text>
             </TextContainer>
           </ListItem>
-        })}
+        })
+        : <EmptyMessage>Your cart is empty</EmptyMessage>}
       </List>
       <Link to='/checkout'>
         <CheckoutButton>Go to Checkout</CheckoutButton>

@@ -34,7 +34,12 @@ const CategoryList = () => {
   return (
     <List>
       {categories.map(({title, id, imageUrl}) => {
-        return <Category title={title} key={id} imageUrl={imageUrl}/>
+        return <Category 
+          title={title} 
+          key={id} 
+          imageUrl={imageUrl}
+          route={`/shop/${title}`}
+          />
       })}
     </List>
   );

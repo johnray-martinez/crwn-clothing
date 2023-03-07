@@ -54,3 +54,8 @@ export const Text = styled.p`
 export const CheckoutButton = styled(CustomButton)`
   width: 100%;
 `;
+
+export const EmptyMessage = styled.p`
+  font-weight: 700;
+  font-size: 24px;
+`;

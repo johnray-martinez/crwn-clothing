@@ -15,6 +15,7 @@ export const TextContainer = styled.div`
   padding: 16px 48px;
   border: 2px solid black;
   transition: 0.3s;
+  text-align: center;
 `;
 
 export const Text = styled.p`
@@ -22,7 +23,7 @@ export const Text = styled.p`
 `;
 
 export const Title = styled(Text)`
-  text-transform: lowercase;
+  text-transform: uppercase;
 `;
 
 export const Container = styled.div`
