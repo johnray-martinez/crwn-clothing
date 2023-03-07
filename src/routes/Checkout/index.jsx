@@ -1,6 +1,14 @@
 import { useContext } from 'react';
 import { CartContext } from '../../context/cart';
-import './index.styles.scss';
+import {
+  Table,
+  Row,
+  RowHeader,
+  LastRow,
+  Total,
+  Control,
+  Image
+} from './index.styles.jsx';
 
 const Checkout = () => {
   const { cart, addItemToCart, removeItemToCart } = useContext(CartContext);
@@ -9,37 +17,37 @@ const Checkout = () => {
   let totalPrice = 0;
 
   return(
-    <main className='checkout'>
-      <div className='checkout__table'>
-        <div className='checkout__table-row checkout__table-row--header'>
+    <main>
+      <Table>
+        <RowHeader>
           <p>Product</p>
           <p>Description</p>
           <p>Quantity</p>
           <p>Price</p>
           <p>Remove</p>
-        </div>
+        </RowHeader>
         {products.map((product) => {
           const {id, name, imageUrl, quantity, price} = product;
           totalPrice += (price * quantity);
 
-          return <div key={id} className='checkout__table-row'>
-            <div className='checkout__table-image-container'>
-              <img className='checkout__table-image' src={imageUrl} alt={name} />
+          return <Row key={id}>
+            <div>
+              <Image src={imageUrl} alt={name} />
             </div>
             <p>{name}</p>
             <p> 
-              <span className='checkout__table-control' onClick={() => removeItemToCart(id)}> {'< '} </span> 
+              <Control onClick={() => removeItemToCart(id)}> {'< '} </Control> 
               {quantity} 
-              <span className='checkout__table-control' onClick={() => addItemToCart(product)}>  {' >'} </span>
+              <Control onClick={() => addItemToCart(product)}>  {' >'} </Control>
             </p>
             <p>${price * quantity}</p>
-            <p className='checkout__table-control' onClick={() => removeItemToCart(id, true)}>X</p>
-          </div>
+            <Control as='p' onClick={() => removeItemToCart(id, true)}>X</Control>
+          </Row>
         })}
-        <div className='checkout__table-row checkout__table-row--no-border checkout__table-row--right-align'>
-          <p className='checkout__table-total'>Total: ${totalPrice}</p>
-        </div>
-      </div>
+        <LastRow>
+          <Total>Total: ${totalPrice}</Total>
+        </LastRow>
+      </Table>
     </main>
   );
 }

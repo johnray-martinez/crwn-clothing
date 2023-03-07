@@ -9,10 +9,12 @@ const CategoryCatalogue = () => {
   const { categories } = useContext(CategoryContext);
   const productsList = categories[categorySlug];
 
-  console.log(categories);
   return(
-    <div className='category-catalogue'>
-      {productsList && <CategoryRow title={categorySlug} products={productsList} />}
+    <div>
+      {productsList && <CategoryRow 
+        title={categorySlug} 
+        products={productsList} 
+      />}
     </div>
   );
 }

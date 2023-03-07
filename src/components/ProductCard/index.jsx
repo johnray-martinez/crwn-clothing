@@ -1,27 +1,33 @@
 import { useContext } from 'react';
-import CustomButton from '../CustomButton';
+
 import { CartContext } from '../../context/cart';
-import './index.styles.scss';
+import { 
+  Card,
+  Overlay,
+  Image,
+  TextContainer,
+  StyledButton
+} from './index.styles.jsx';
 
 const ProductCard = (props) => {
   const { addItemToCart } = useContext(CartContext);
-  const { name, imageUrl, price} = props;
+  const { name, imageUrl, price} = props.product;
 
   const addToCart = () => {
-    addItemToCart(props);
+    addItemToCart(props.product);
   }
 
   return(
-    <div className='product-card'>
-      <div className='product-card__overlay'>
-        <CustomButton onClick={addToCart} type='button' buttonType='inverted'>ADD TO CART</CustomButton>
-      </div>
-      <img className='product-card__image' src={imageUrl} alt="name" />
-      <div className='product-card__text-container'>
+    <Card>
+      <Overlay>
+        <StyledButton onClick={addToCart} type='button' buttonType='inverted'>ADD TO CART</StyledButton>
+      </Overlay>
+      <Image src={imageUrl} alt={name} />
+      <TextContainer>
         <span>{name}</span>
         <span>{price}</span>
-      </div>
-    </div>
+      </TextContainer>
+    </Card>
   );
 }
 

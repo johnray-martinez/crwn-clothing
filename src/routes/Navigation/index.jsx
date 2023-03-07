@@ -5,8 +5,13 @@ import { UserContext } from '../../context/user';
 import { signOutUser } from '../../utils/firebase/firebase';
 import ShoppingCartIcon from '../../components/ShoppingCartIcon';
 import ShoppingCartDropdown from '../../components/ShoppingCartDropdown';
-import './index.styles.scss';
 import { CartContext } from '../../context/cart';
+
+import { 
+  NavigationContainer,
+  NavigationLinksContainer,
+  NavigationLink
+ } from './index.styles';
 
 const Navigation = () => {
   const { currentUser } = useContext(UserContext);
@@ -18,29 +23,29 @@ const Navigation = () => {
 
   return (
     <Fragment>
-      <div className='navigation'>
-        <div className='navigation__logo-container'>
+      <NavigationContainer>
+        <div>
           <Link to='/'>
             <CrownLogo />
           </Link>
         </div>
-        <div className='navigation__links-container'>
-          <Link className='navigation__link' to='/shop'>
+        <NavigationLinksContainer>
+          <NavigationLink to='/shop'>
             SHOP
-          </Link>
-          <Link className='navigation__link' to='/contact'>
+          </NavigationLink>
+          {/* <NavigationLink to='/contact'>
             CONTACT
-          </Link>
+          </NavigationLink> */}
           { !currentUser ? 
-            <Link className='navigation__link' to='/sign-in'>
+            <NavigationLink to='/sign-in'>
             SIGN IN
-            </Link>
-          : <span className='navigation__link' onClick={signOutHandler}>SIGN OUT</span>
+            </NavigationLink>
+          : <NavigationLink as='span' onClick={signOutHandler}>SIGN OUT</NavigationLink>
           }
           <ShoppingCartIcon itemCount={totalItemsInCart}/>
-        </div>   
+        </NavigationLinksContainer>   
         { showDropdown && <ShoppingCartDropdown productList={[...cart.values()]} /> }
-      </div>
+      </NavigationContainer>
     <Outlet />
   </Fragment>
 )};

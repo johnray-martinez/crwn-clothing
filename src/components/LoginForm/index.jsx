@@ -7,7 +7,11 @@ import {
 import FormField from '../FormField';
 import CustomButton from '../CustomButton';
 
-const LoginForm = () => {
+import {
+  ButtonContainer
+} from './index.styles.jsx';
+
+const LoginForm = ({className}) => {
   // DEFAULT STATE
   const defaultFieldValues = {
     email: '',
@@ -30,7 +34,7 @@ const LoginForm = () => {
     event.preventDefault();
     
     try {
-      const { user } = await signInUserWithEmailAndPassword(email, password);
+      await signInUserWithEmailAndPassword(email, password);
     } catch (err) {
       console.error(err.message);
     }
@@ -42,11 +46,11 @@ const LoginForm = () => {
   }
 
   return(
-    <div className='login-form__container'>
+    <div className={className}>
       <h2>Already have an account?</h2>
       <p>Sign in with your email and password</p>
 
-      <form className='login-form' onSubmit={submitHandler}>
+      <form onSubmit={submitHandler}>
         <FormField 
           label='email'
           name='email'
@@ -63,8 +67,12 @@ const LoginForm = () => {
           required
           onChange={changeHandler}
         />
-        <CustomButton type='submit'>Sign In</CustomButton>
-        <CustomButton type='button' buttonType='google' onClick={logGoogleUser}>Sign in With Google</CustomButton>
+        <ButtonContainer>
+          <CustomButton type='submit'>Sign In</CustomButton>
+          <span> OR </span>
+          <CustomButton type='button' buttonType='google' onClick={logGoogleUser}>Sign in With Google</CustomButton>
+        </ButtonContainer>
+        
 
       </form>
     </div>

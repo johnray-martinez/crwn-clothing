@@ -1,17 +1,19 @@
-import { Link } from 'react-router-dom';
 import ProductCard from '../ProductCard';
-import './index.styles.scss';
+import {
+  Title,
+  ProductList
+} from './index.styles.jsx';
 
 const CategoryRow = ({title, products}) => {
   return (
     <div key={title}>
       <h2>
-        <Link className='category-row__category-title' to={`/shop/${title}`}>{title}</Link>
+        <Title to={`/shop/${title}`}>{title}</Title>
       </h2>
-      <div className='category-row__product-list'>
-        {products.map(({id, name, imageUrl, price}) => {
-            return <ProductCard key={id} id={id} name={name} imageUrl={imageUrl} price={price} />})}
-      </div>
+      <ProductList>
+        {products.map((product) => {
+            return <ProductCard key={product.id} product={product} />})}
+      </ProductList>
     </div>
   )
 }

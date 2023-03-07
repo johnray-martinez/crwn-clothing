@@ -1,5 +1,7 @@
 import Category from '../Category';
-import './index.styles.scss';
+import {
+  List
+} from './index.styles.jsx';
 
 const CategoryList = () => {
   const categories = [
@@ -30,11 +32,16 @@ const CategoryList = () => {
     }
   ]
   return (
-    <div className='category-list'>
+    <List>
       {categories.map(({title, id, imageUrl}) => {
-        return <Category title={title} key={id} imageUrl={imageUrl}/>
+        return <Category 
+          title={title} 
+          key={id} 
+          imageUrl={imageUrl}
+          route={`/shop/${title}`}
+          />
       })}
-    </div>
+    </List>
   );
 }
 
