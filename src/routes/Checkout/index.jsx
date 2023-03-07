@@ -1,13 +1,13 @@
 import { useContext } from 'react';
 import { CartContext } from '../../context/cart';
 import {
-  CheckoutTable,
-  CheckoutTableRowHeader,
-  CheckoutTableRow,
-  CheckoutTableRowLastItem,
-  CheckoutTableTotal,
-  CheckoutTableControl,
-  CheckoutTableImage
+  Table,
+  Row,
+  RowHeader,
+  LastRow,
+  Total,
+  Control,
+  Image
 } from './index.styles.jsx';
 
 const Checkout = () => {
@@ -18,36 +18,36 @@ const Checkout = () => {
 
   return(
     <main>
-      <CheckoutTable>
-        <CheckoutTableRowHeader>
+      <Table>
+        <RowHeader>
           <p>Product</p>
           <p>Description</p>
           <p>Quantity</p>
           <p>Price</p>
           <p>Remove</p>
-        </CheckoutTableRowHeader>
+        </RowHeader>
         {products.map((product) => {
           const {id, name, imageUrl, quantity, price} = product;
           totalPrice += (price * quantity);
 
-          return <CheckoutTableRow key={id}>
+          return <Row key={id}>
             <div>
-              <CheckoutTableImage src={imageUrl} alt={name} />
+              <Image src={imageUrl} alt={name} />
             </div>
             <p>{name}</p>
             <p> 
-              <CheckoutTableControl onClick={() => removeItemToCart(id)}> {'< '} </CheckoutTableControl> 
+              <Control onClick={() => removeItemToCart(id)}> {'< '} </Control> 
               {quantity} 
-              <CheckoutTableControl onClick={() => addItemToCart(product)}>  {' >'} </CheckoutTableControl>
+              <Control onClick={() => addItemToCart(product)}>  {' >'} </Control>
             </p>
             <p>${price * quantity}</p>
-            <CheckoutTableControl as='p' onClick={() => removeItemToCart(id, true)}>X</CheckoutTableControl>
-          </CheckoutTableRow>
+            <Control as='p' onClick={() => removeItemToCart(id, true)}>X</Control>
+          </Row>
         })}
-        <CheckoutTableRowLastItem>
-          <CheckoutTableTotal>Total: ${totalPrice}</CheckoutTableTotal>
-        </CheckoutTableRowLastItem>
-      </CheckoutTable>
+        <LastRow>
+          <Total>Total: ${totalPrice}</Total>
+        </LastRow>
+      </Table>
     </main>
   );
 }

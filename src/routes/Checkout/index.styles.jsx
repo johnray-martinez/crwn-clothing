@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 
-export const CheckoutTable = styled.div`
+export const Table = styled.div`
   width: 70%;
   margin: 0 auto;
 `;
 
-export const CheckoutTableRow = styled.div`
+export const Row = styled.div`
   display: flex;
   grid-gap: 12px;
   border-bottom: 2px solid black;
@@ -23,25 +23,22 @@ export const CheckoutTableRow = styled.div`
   }
 `;
 
-export const CheckoutTableRowHeader = styled(CheckoutTableRow)`
+export const RowHeader = styled(Row)`
   font-size: 18px;
   font-weight: 700;
 `;
 
-export const CheckoutTableRowNoBorder = styled(CheckoutTableRow)`
+export const LastRow = styled(Row)`
   border: none;
-`;
-
-export const CheckoutTableRowLastItem = styled(CheckoutTableRowNoBorder)`
   justify-content: flex-end;
 `;
 
-export const CheckoutTableTotal = styled.p`
+export const Total = styled.p`
   font-size: 32px;
   font-weight: 700;
 `;
 
-export const CheckoutTableControl = styled.span`
+export const Control = styled.span`
   cursor: pointer;
   font-weight: 700;
   transition: 0.3s;
@@ -51,7 +48,7 @@ export const CheckoutTableControl = styled.span`
   }
 `;
 
-export const CheckoutTableImage = styled.img`
+export const Image = styled.img`
   height: 100%;
   width: 100%;
   object-fit: cover;
