@@ -11,7 +11,7 @@ import {
 
 const ProductCard = (props) => {
   const { addItemToCart } = useContext(CartContext);
-  const { name, imageUrl, price} = props;
+  const { name, imageUrl, price} = props.product;
 
   const addToCart = () => {
     addItemToCart(props);
