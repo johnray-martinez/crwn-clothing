@@ -35,4 +35,9 @@
   &__title {
     text-transform: lowercase;
   }
+
+  &__title, 
+  &__subtitle {
+    color: black;
+  }
 }
