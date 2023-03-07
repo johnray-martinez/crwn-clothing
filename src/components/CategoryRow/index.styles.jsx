@@ -5,16 +5,19 @@ export const Title = styled(Link)`
   font-size: 32px;
   font-weight: 700;
   text-decoration: none;
-  color: #767676;
+  color: black;
   transition: 0.3s;
+  text-transform: uppercase;
+  text-align: center;
+  display: block;
 
   &:hover {
-    color: black;
+    color: #767676;
   }
 `;
 
 export const ProductList = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-gap: 8px;
+  grid-gap: 24px;
 `;

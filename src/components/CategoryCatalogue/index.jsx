@@ -10,8 +10,11 @@ const CategoryCatalogue = () => {
   const productsList = categories[categorySlug];
 
   return(
-    <div className='category-catalogue'>
-      {productsList && <CategoryRow title={categorySlug} products={productsList} />}
+    <div>
+      {productsList && <CategoryRow 
+        title={categorySlug} 
+        products={productsList} 
+      />}
     </div>
   );
 }
