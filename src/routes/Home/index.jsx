@@ -1,11 +1,11 @@
 import CategoryList from '../../components/CategoryList';
-import './index.styles.scss';
+import { HomeContainer } from './index.styles';
 
 const Home = () => {
   return(
-    <main className='home'>
+    <HomeContainer>
       <CategoryList />
-    </main>
+    </HomeContainer>
   )
 }
 
