@@ -14,7 +14,7 @@ const ProductCard = (props) => {
   const { name, imageUrl, price} = props.product;
 
   const addToCart = () => {
-    addItemToCart(props);
+    addItemToCart(props.product);
   }
 
   return(

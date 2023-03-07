@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import CustomButton from '../CustomButton';
 
 export const Container = styled.div`
   height: 375px;
@@ -17,7 +18,8 @@ export const Container = styled.div`
 
 export const List = styled.div`
   max-height: 305px;
-  overflow-y: scroll;
+  overflow-y: auto;
+  height: 100%;
 `;
 
 export const ListItem = styled.div`
@@ -47,4 +49,8 @@ export const TextContainer = styled.div`
 export const Text = styled.p`
   margin: 0;
   font-size: 18px;
+`;
+
+export const CheckoutButton = styled(CustomButton)`
+  width: 100%;
 `;

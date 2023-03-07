@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import CustomButton from '../CustomButton';
+
 import {
   Container,
   List,
@@ -7,15 +7,18 @@ import {
   ThumbnailContainer,
   Thumbnail,
   TextContainer,  
-  Text
+  Text,
+  CheckoutButton
 } from './index.styles.jsx';
 
 const ShoppingCartDropdown = ({productList}) => {
   return(
     <Container>
       <List>
-        {productList.map(({name, id, quantity, imageUrl, price}) => {
-          return <ListItem key={id}>
+        {productList.map((product, i) => {
+          const {name, quantity, imageUrl, price} = product;
+
+          return <ListItem key={i}>
             <ThumbnailContainer>
               <Thumbnail src={imageUrl} alt={name} />
             </ThumbnailContainer>
@@ -27,7 +30,7 @@ const ShoppingCartDropdown = ({productList}) => {
         })}
       </List>
       <Link to='/checkout'>
-        <CustomButton>Go to Checkout</CustomButton>
+        <CheckoutButton>Go to Checkout</CheckoutButton>
       </Link>
     </Container>
   )
