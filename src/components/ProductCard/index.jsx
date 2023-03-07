@@ -3,22 +3,12 @@ import CustomButton from '../CustomButton';
 import { CartContext } from '../../context/cart';
 import './index.styles.scss';
 
-const ProductCard = ({id, name, imageUrl, price}) => {
-  const { cart, setCart, totalItemsInCart, setTotalItemsInCart } = useContext(CartContext);
+const ProductCard = (props) => {
+  const { addItemToCart } = useContext(CartContext);
+  const { name, imageUrl, price} = props;
+
   const addToCart = () => {
-    const newMap = new Map(cart);
-
-    if (newMap.has(id)) {
-      const product = newMap.get(id);
-      product.quantity++;
-    } else {
-      newMap.set(id, {
-        id, name, imageUrl, price, quantity: 1
-      })
-    }
-
-    setCart(newMap);
-    setTotalItemsInCart(totalItemsInCart + 1);
+    addItemToCart(props);
   }
 
   return(

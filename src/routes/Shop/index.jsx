@@ -8,11 +8,11 @@ const Shop = () => {
   const { products } = useContext(ProductContext);
 
   return (
-    <div className='shop'>
+    <main className='shop'>
       {products.map(({name, id, imageUrl, price}) => {
         return <ProductCard key={id} id={id} name={name} imageUrl={imageUrl} price={price} />
       })}
-    </div>
+    </main>
   );
 }
 
