@@ -51,6 +51,8 @@ export const CartProvider = ({children}) => {
     showDropdown
   }, dispatch] = useReducer(cartReducer, INITIAL_STATE);
 
+
+  // HELPERS
   const updateCartReducer = (itemsToAdd) => {
     const cartArray = [...cart.values()];
     const totalItems = cartArray.reduce((total, currentItem) => total + currentItem.quantity, 0);
@@ -58,7 +60,6 @@ export const CartProvider = ({children}) => {
     dispatch({type: CART_ACTION_TYPES.UPDATE_CART, payload: { totalItemsInCart: totalItems, cart: itemsToAdd}})
   }
 
-  // HELPERS
   const addItemToCart = (itemToAdd) => {
     const newMap = new Map(cart);
     const {id, name, imageUrl, price} = itemToAdd;

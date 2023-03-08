@@ -6,8 +6,8 @@ import { signOutUser } from '../../utils/firebase/firebase';
 import ShoppingCartIcon from '../../components/ShoppingCartIcon';
 import ShoppingCartDropdown from '../../components/ShoppingCartDropdown';
 import { CartContext } from '../../context/cart';
-
 import { selectCurrentUser } from '../../store/user/userSelectors';
+import { selectShowDropdown } from '../../store/cart/cartSelectors';
 
 import { 
   NavigationContainer,
@@ -16,9 +16,10 @@ import {
  } from './index.styles';
 
 const Navigation = () => {
-  const { cart, totalItemsInCart, showDropdown } = useContext(CartContext);
+  const { cart, totalItemsInCart } = useContext(CartContext);
   
   const currentUser = useSelector(selectCurrentUser);
+  const showDropdown = useSelector(selectShowDropdown);
 
   const signOutHandler = async () => {
     await signOutUser();
@@ -47,7 +48,8 @@ const Navigation = () => {
           }
           <ShoppingCartIcon itemCount={totalItemsInCart}/>
         </NavigationLinksContainer>   
-        { showDropdown && <ShoppingCartDropdown productList={[...cart.values()]} /> }
+        { showDropdown && <ShoppingCartDropdown 
+        productList={[...cart.values()]} /> }
       </NavigationContainer>
     <Outlet />
   </Fragment>
