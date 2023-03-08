@@ -17,8 +17,7 @@ const INITIAL_STATE = {
 }
 
 const CART_ACTION_TYPES = {
-  UPDATE_CART_VALUE: 'UPDATE_CART_VALUE',
-  UPDATE_CART_TOTAL: 'UPDATE_CART_TOTAL',
+  UPDATE_CART: 'UPDATE_CART',
   TOGGLE_DROPDOWN: 'TOGGLE_DROPDOWN'
 }
 
@@ -26,18 +25,14 @@ const cartReducer = (state, action) => {
   const { type, payload } = action;
 
   switch (type) {
-    case CART_ACTION_TYPES.UPDATE_CART_VALUE: {
+    case CART_ACTION_TYPES.UPDATE_CART: {
+      const { cart, totalItemsInCart } = payload;
       return {
         ...state,
-        cart: payload
+        cart, 
+        totalItemsInCart
       }
     }
-
-    case CART_ACTION_TYPES.UPDATE_CART_TOTAL:
-      return {
-        ...state, 
-        totalItemsInCart: payload
-      }
 
     case CART_ACTION_TYPES.TOGGLE_DROPDOWN:
       return {
@@ -56,6 +51,13 @@ export const CartProvider = ({children}) => {
     showDropdown
   }, dispatch] = useReducer(cartReducer, INITIAL_STATE);
 
+  const updateCartReducer = (itemsToAdd) => {
+    const cartArray = [...cart.values()];
+    const totalItems = cartArray.reduce((total, currentItem) => total + currentItem.quantity, 0);
+
+    dispatch({type: CART_ACTION_TYPES.UPDATE_CART, payload: { totalItemsInCart: totalItems, cart: itemsToAdd}})
+  }
+
   // HELPERS
   const addItemToCart = (itemToAdd) => {
     const newMap = new Map(cart);
@@ -70,10 +72,11 @@ export const CartProvider = ({children}) => {
       })
     }
   
-    dispatch({type: CART_ACTION_TYPES.UPDATE_CART_VALUE, payload: newMap});
+    updateCartReducer(newMap);
   }
 
   const removeItemToCart = (id, removeAll = false) =>{
+
     if (!cart.has(id)) return;
     const newMap = new Map(cart);
 
@@ -85,24 +88,13 @@ export const CartProvider = ({children}) => {
       product.quantity === 1 ? newMap.delete(id) : product.quantity--;
     }
 
-    dispatch({type: CART_ACTION_TYPES.UPDATE_CART_VALUE, payload: newMap})
-  }
-
-  const setTotalItemsInCart = (total) => {
-    dispatch({type: CART_ACTION_TYPES.UPDATE_CART_TOTAL, payload: total});
+    updateCartReducer(newMap);
   }
 
   const setShowDropdown = (value) => {
     dispatch({type: CART_ACTION_TYPES.TOGGLE_DROPDOWN, payload: value})
   }
 
-  // HOOKS
-  useEffect(() => {
-    const cartArray = [...cart.values()];
-    const totalItems = cartArray.reduce((total, currentItem) => total + currentItem.quantity, 0);
-
-    setTotalItemsInCart(totalItems);
-  }, [cart]);
 
   const value = {
     cart, addItemToCart,
