@@ -1,13 +1,14 @@
-import { useContext } from 'react';
+import { useSelector } from 'react-redux'; 
 import { useParams } from 'react-router-dom';
 
-import { CategoryContext } from '../../context/category';
+import { selectCategories } from '../../store/categories/categorySelectors';
 import CategoryRow from '../CategoryRow';
 
 const CategoryCatalogue = () => {
   const { categorySlug } = useParams();
-  const { categories } = useContext(CategoryContext);
+  const categories = useSelector(selectCategories);
   const productsList = categories[categorySlug];
+  
 
   return(
     <div>
