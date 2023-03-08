@@ -1,11 +1,11 @@
 import { useSelector } from 'react-redux';
 
-import { selectCategories } from '../../store/categories/categorySelectors';
+import { selectCategoriesArray, selectCategories } from '../../store/categories/categorySelectors';
 import CategoryRow from '../CategoryRow';
 
 const CategoryPreview = () => {
-const categories = useSelector(selectCategories);
-  
+  const categories = useSelector(selectCategoriesArray);
+
   return(
     <div className='category-preview'>
       {Object.keys(categories).map((title) => {

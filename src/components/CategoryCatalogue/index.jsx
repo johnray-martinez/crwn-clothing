@@ -1,12 +1,12 @@
 import { useSelector } from 'react-redux'; 
 import { useParams } from 'react-router-dom';
 
-import { selectCategories } from '../../store/categories/categorySelectors';
+import { selectCategoriesArray } from '../../store/categories/categorySelectors';
 import CategoryRow from '../CategoryRow';
 
 const CategoryCatalogue = () => {
   const { categorySlug } = useParams();
-  const categories = useSelector(selectCategories);
+  const categories = useSelector(selectCategoriesArray);
   const productsList = categories[categorySlug];
   
 

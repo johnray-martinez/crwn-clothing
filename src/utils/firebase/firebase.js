@@ -65,19 +65,9 @@ export const addCollectionAndDocuments = async (collectionKey, objectsToAdd) => 
 
 export const getCategoriesAndDocuments = async () => {
   const q = query(categoriesCollection);
-
   const querySnapshot = await getDocs(q);
-  const categoryMap = querySnapshot.docs.reduce((acc, docSnapshot) => {
-    const { title, items } = docSnapshot.data();
-    acc[title.toLowerCase()] = items;
-    return acc;
-  }, {});
-
-  return categoryMap;
+  return querySnapshot.docs.map((snapshot) => snapshot.data());
 }
-
-
-
 
 export const signInWithGooglePopup = () => signInWithPopup(auth, googleProvider);
 
