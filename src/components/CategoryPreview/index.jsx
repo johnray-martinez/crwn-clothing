@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 
-import { selectCategoriesArray, selectCategories } from '../../store/categories/categorySelectors';
+import { selectCategoriesArray } from '../../store/categories/categorySelectors';
 import CategoryRow from '../CategoryRow';
 
 const CategoryPreview = () => {
