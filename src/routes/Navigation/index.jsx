@@ -5,9 +5,12 @@ import { useSelector } from 'react-redux';
 import { signOutUser } from '../../utils/firebase/firebase';
 import ShoppingCartIcon from '../../components/ShoppingCartIcon';
 import ShoppingCartDropdown from '../../components/ShoppingCartDropdown';
-import { CartContext } from '../../context/cart';
 import { selectCurrentUser } from '../../store/user/userSelectors';
-import { selectShowDropdown } from '../../store/cart/cartSelectors';
+import { 
+  selectShowDropdown,
+  selectCart,
+  selectTotalItemsInCart
+ } from '../../store/cart/cartSelectors';
 
 import { 
   NavigationContainer,
@@ -15,11 +18,11 @@ import {
   NavigationLink
  } from './index.styles';
 
-const Navigation = () => {
-  const { cart, totalItemsInCart } = useContext(CartContext);
-  
+const Navigation = () => { 
   const currentUser = useSelector(selectCurrentUser);
   const showDropdown = useSelector(selectShowDropdown);
+  const cart = useSelector(selectCart);
+  const totalItemsInCart = useSelector(selectTotalItemsInCart);
 
   const signOutHandler = async () => {
     await signOutUser();

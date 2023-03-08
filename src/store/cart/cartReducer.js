@@ -11,11 +11,23 @@ export const cartReducer = (state = INITIAL_STATE, action) => {
 
   switch (type) {
     case CART_ACTION_TYPES.UPDATE_CART: {
-      const { cart, totalItemsInCart } = payload;
+      const newMap = new Map(state.cart);
+      const { id } = payload;
+
+      if (newMap.has(id)) {
+        const product = newMap.get(id);
+        product.quantity++;
+      } else {
+        newMap.set(id, { ...payload, quantity: 1 })
+      }
+
+      const cartArray = [...newMap?.values()];
+      const totalItems = cartArray.reduce((total, currentItem) => total + currentItem.quantity, 0);
+
       return {
         ...state,
-        cart, 
-        totalItemsInCart
+        cart: newMap, 
+        totalItemsInCart: totalItems
       }
     }
 
