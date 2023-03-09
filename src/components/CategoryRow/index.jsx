@@ -1,4 +1,7 @@
+import { useSelector } from 'react-redux';
+
 import ProductCard from '../ProductCard';
+
 import {
   Title,
   ProductList

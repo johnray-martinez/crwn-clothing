@@ -16,13 +16,13 @@ export const fetchCategoriesStart = () => {
 
 export const fetchCategoriesFailed = (error) => {
   return { 
-    type: CATEGORY_ACTION_TYPES.FETCH_CATEGORIES_START,
+    type: CATEGORY_ACTION_TYPES.FETCH_CATEGORIES_FAILED,
     payload: error
   }
 }
 
 export const fetchCategoriesAsync = () => async (dispatch) => {
-  dispatch(fetchCategoriesStart);
+  dispatch(fetchCategoriesStart());
 
   try {
     const categoriesArray = await getCategoriesAndDocuments();
