@@ -23,17 +23,17 @@ export const addItemToCart = (productsInCart, itemToAdd) => {
 
 export const removeItemFromCart = (cart, id, removeAll = false) => {
   const existingProductIndex = cart.findIndex((product) => product.id === id);
-
+  const deleteItem = (idx) => cartCopy.splice(idx, 1);
   if (existingProductIndex < 0) return; // nothing to delete
 
   const cartCopy = [...cart];
 
   if (removeAll) {
-    cartCopy.splice(existingProductIndex, 1);
+    deleteItem(existingProductIndex)
   } else {
     const product = cartCopy[existingProductIndex];
 
-    product.quantity === 1 ? delete cartCopy[id] : product.quantity--;
+    product.quantity === 1 ? deleteItem(existingProductIndex) : product.quantity--;
   }
 
   return updateCart(cartCopy);
