@@ -1,8 +1,8 @@
 import { Fragment } from 'react';
 import { ReactComponent as CrownLogo } from '../../assets/logos/crown.svg';
 import { Outlet, Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { signOutUser } from '../../utils/firebase/firebase';
+import { useSelector, useDispatch } from 'react-redux';
+import { signOutStart } from '../../store/user/userAction';
 import ShoppingCartIcon from '../../components/ShoppingCartIcon';
 import ShoppingCartDropdown from '../../components/ShoppingCartDropdown';
 import { selectCurrentUser } from '../../store/user/userSelectors';
@@ -23,9 +23,10 @@ const Navigation = () => {
   const showDropdown = useSelector(selectShowDropdown);
   const cart = useSelector(selectCart);
   const totalItemsInCart = useSelector(selectTotalItemsInCart);
+  const dispatch = useDispatch();
 
   const signOutHandler = async () => {
-    await signOutUser();
+    dispatch(signOutStart());
   }
 
   return (

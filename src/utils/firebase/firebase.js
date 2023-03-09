@@ -69,26 +69,32 @@ export const getCategoriesAndDocuments = async () => {
   return querySnapshot.docs.map((snapshot) => snapshot.data());
 }
 
-export const signInWithGooglePopup = () => signInWithPopup(auth, googleProvider);
+export const createUserDocumentFromAuth = async (
+  userAuth,
+  additionalInformation = {}
+) => {
+  if (!userAuth) return;
 
-export const createUserDocumentFromAuth = async (userAuth) => {
   const userDocRef = doc(db, 'users', userAuth.uid);
   const userSnapshot = await getDoc(userDocRef)
 
   if (!userSnapshot.exists()) {
-    const {displayName, email} = userAuth;
+    const { displayName, email } = userAuth;
     const createdAt = new Date();
 
     try {
       await setDoc(userDocRef, {
         displayName, 
         email, 
-        createdAt
+        createdAt,
+        ...additionalInformation
       });
     } catch (error) {
       console.error('error creating the user', error.message);
     }
   }
+
+  return userSnapshot;
 }
 
 export const createUserDocumentWithEmailAndPassword = async (email, password) => {
@@ -97,12 +103,25 @@ export const createUserDocumentWithEmailAndPassword = async (email, password) =>
   return await createUserWithEmailAndPassword(auth, email, password);
 }
 
+export const signOutUser = async () => signOut(auth);
+
+export const onAuthStateChangedListener = (callback) => onAuthStateChanged(auth, callback);
+
 export const signInUserWithEmailAndPassword = async (email, password) => {
   if (!email || !password) return;
 
   return await signInWithEmailAndPassword(auth, email, password);
 }
 
-export const signOutUser = async () => signOut(auth);
+export const signInWithGooglePopup = () => signInWithPopup(auth, googleProvider);
 
-export const onAuthStateChangedListener = (callback) => onAuthStateChanged(auth, callback);
+export const getCurrentUser = () => new Promise((resolve, reject) => {
+  const unsubscribe = onAuthStateChanged(
+    auth, 
+    (userAuth) => {
+      unsubscribe();
+      resolve(userAuth);
+    },
+    reject
+  )
+})

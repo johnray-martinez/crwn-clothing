@@ -1,9 +1,6 @@
 import { useState } from 'react'; 
-import { 
-  signInWithGooglePopup, 
-  createUserDocumentFromAuth,
-  signInUserWithEmailAndPassword
-} from '../../utils/firebase/firebase';
+import { useDispatch } from 'react-redux';
+import { googleSignInStart, emailSignInStart } from '../../store/user/userAction';
 import FormField from '../FormField';
 import CustomButton from '../CustomButton';
 
@@ -24,6 +21,9 @@ const LoginForm = ({className}) => {
   // DESTRUCTURED STATE
   const {email, password} = fieldValues;
 
+  // HOOKS SETUP
+  const dispatch = useDispatch();
+
   // HELPERS
   const changeHandler = (event) => {
     const {name, value} = event.target;
@@ -33,16 +33,11 @@ const LoginForm = ({className}) => {
   const submitHandler = async (event) => {
     event.preventDefault();
     
-    try {
-      await signInUserWithEmailAndPassword(email, password);
-    } catch (err) {
-      console.error(err.message);
-    }
+    dispatch(emailSignInStart(email, password));
   }
 
-  const logGoogleUser = async () => {
-    const response  = await signInWithGooglePopup();
-    createUserDocumentFromAuth(response.user);
+  const logGoogleUser = () => {
+    dispatch(googleSignInStart());
   }
 
   return(
