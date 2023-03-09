@@ -30,11 +30,6 @@ const SignUpForm = ({className}) => {
 
     try {
       dispatch(signUpStart(email, password, displayName));
-      // const {user} = await createUserDocumentWithEmailAndPassword(email, password);
-      // await createUserDocumentFromAuth({...user, displayName});
-
-      // return redirect('/');
-
     } catch (err) {
       console.error(err.message);
     }
