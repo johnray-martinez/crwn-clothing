@@ -1,10 +1,24 @@
-export const selectCart = (state) => state.cart.cart;
+import { createSelector } from 'reselect';
 
-export const selectShowDropdown = (state) => state.cart.showDropdown;
+export const selectCartReducer = (state) => state.cart;
 
-export const selectTotalItemsInCart = (state) => {
-  const cartArray = [...state.cart.cart.values()];
-  const totalItems = cartArray.reduce((total, currentItem) => total + currentItem.quantity, 0);
-  
-  return totalItems;
-}
+export const selectCart = createSelector(
+  [selectCartReducer],
+  (cartReducer) => cartReducer.cart
+)
+
+export const selectShowDropdown = createSelector(
+  [selectCartReducer],
+  (cartReducer) => cartReducer.showDropdown
+)
+
+export const selectTotalItemsInCart = createSelector(
+  [selectCart],
+  (cart) => {
+    const cartArray = [...cart.values()];
+    const totalItems = cartArray.reduce((total, currentItem) => total + currentItem.quantity, 0);
+    
+    return totalItems;
+  }
+)
+
