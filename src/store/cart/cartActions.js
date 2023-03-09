@@ -1,12 +1,9 @@
 import { CART_ACTION_TYPES } from './cartActionTypes';
 
 const updateCart = (itemToAdd) => {
-  const cartArray = [...itemToAdd.values()];
-  const totalItems = cartArray.reduce((total, currentItem) => total + currentItem.quantity, 0);
-  
   return {
     type: CART_ACTION_TYPES.UPDATE_CART, 
-    payload: { cart: itemToAdd, totalItemsInCart: totalItems }
+    payload: itemToAdd
   }
 }
 

@@ -2,8 +2,7 @@ import { CART_ACTION_TYPES } from './cartActionTypes';
 
 const INITIAL_STATE = {
   cart: new Map(), 
-  showDropdown: false, 
-  totalItemsInCart: 0
+  showDropdown: false
 }
 
 export const cartReducer = (state = INITIAL_STATE, action) => {
@@ -11,11 +10,9 @@ export const cartReducer = (state = INITIAL_STATE, action) => {
 
   switch (type) {
     case CART_ACTION_TYPES.UPDATE_CART: {
-      const { cart, totalItemsInCart } = payload;
       return {
         ...state,
-        cart,
-        totalItemsInCart
+        cart: payload
       }
     }
 
