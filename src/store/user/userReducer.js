@@ -17,29 +17,28 @@ export const userReducer = (state = INITIAL_STATE, action) => {
         isLoading: false
       };
 
-      case USER_ACTION_TYPES.EMAIL_SIGN_IN_START:
-      return {
-        ...state,
-        isLoading: true
-      }
-
-      case USER_ACTION_TYPES.GOOGLE_SIGN_IN_START:
-      return {
-        ...state,
-        isLoading: true
-      }
-
-      case USER_ACTION_TYPES.SIGN_IN_FAILED:
+      case USER_ACTION_TYPES.SIGN_UP_SUCCESS:
       return {
         ...state, 
-        isLoading: false,
-        error: payload
+        isLoading: false
       }
 
+      case USER_ACTION_TYPES.EMAIL_SIGN_IN_START:
+      case USER_ACTION_TYPES.GOOGLE_SIGN_IN_START:
+      case USER_ACTION_TYPES.SIGN_UP_START:
       case USER_ACTION_TYPES.SIGN_OUT_START:
       return {
         ...state,
         isLoading: true
+      }
+    
+      case USER_ACTION_TYPES.SIGN_IN_FAILED:
+      case USER_ACTION_TYPES.SIGN_OUT_FAILED:
+      case USER_ACTION_TYPES.SIGN_UP_FAILED:
+      return {
+        ...state, 
+        isLoading: true,
+        error: payload
       }
 
       case USER_ACTION_TYPES.SIGN_OUT_SUCCESS:
@@ -49,31 +48,6 @@ export const userReducer = (state = INITIAL_STATE, action) => {
         currentUser: null
       }
 
-      case USER_ACTION_TYPES.SIGN_OUT_FAILED:
-      return {
-        ...state, 
-        isLoading: false,
-        error: payload
-      }
-
-      case USER_ACTION_TYPES.SIGN_UP_START:
-      return {
-        ...state, 
-        isLoading: true
-      }
-
-      case USER_ACTION_TYPES.SIGN_UP_SUCCESS:
-      return {
-        ...state, 
-        isLoading: false
-      }
-
-      case USER_ACTION_TYPES.SIGN_UP_FAILED:
-      return {
-        ...state, 
-        isLoading: true
-      }
-      
       default:
         return state;
   }
