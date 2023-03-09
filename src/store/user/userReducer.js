@@ -56,6 +56,24 @@ export const userReducer = (state = INITIAL_STATE, action) => {
         error: payload
       }
 
+      case USER_ACTION_TYPES.SIGN_UP_START:
+      return {
+        ...state, 
+        isLoading: true
+      }
+
+      case USER_ACTION_TYPES.SIGN_UP_SUCCESS:
+      return {
+        ...state, 
+        isLoading: false
+      }
+
+      case USER_ACTION_TYPES.SIGN_UP_FAILED:
+      return {
+        ...state, 
+        isLoading: true
+      }
+      
       default:
         return state;
   }

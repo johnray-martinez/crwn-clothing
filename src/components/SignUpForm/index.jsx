@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { redirect } from 'react-router-dom';
-import { createUserDocumentWithEmailAndPassword, createUserDocumentFromAuth } from '../../utils/firebase/firebase';
+import { useDispatch } from 'react-redux';
+import { signUpStart } from '../../store/user/userAction';
 import FormField from '../FormField';
 import CustomButton from '../CustomButton';
 
@@ -13,7 +13,7 @@ const SignUpForm = ({className}) => {
   }
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { displayName, email, password, confirmPassword } = formFields;
-
+  const dispatch = useDispatch();
   const changeHandler = (event) => {
     const {name, value} = event.target;
 
@@ -29,10 +29,11 @@ const SignUpForm = ({className}) => {
     }
 
     try {
-      const {user} = await createUserDocumentWithEmailAndPassword(email, password);
-      await createUserDocumentFromAuth({...user, displayName});
+      dispatch(signUpStart(email, password, displayName));
+      // const {user} = await createUserDocumentWithEmailAndPassword(email, password);
+      // await createUserDocumentFromAuth({...user, displayName});
 
-      return redirect('/');
+      // return redirect('/');
 
     } catch (err) {
       console.error(err.message);
