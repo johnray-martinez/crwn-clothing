@@ -12,7 +12,6 @@ const ShoppingCartIcon = ({itemCount}) => {
   const dispatch = useDispatch();
 
   const toggleDropdown = () => {
-    console.log(showDropdown);
     dispatch(setShowDropdown(!showDropdown));
   }
 

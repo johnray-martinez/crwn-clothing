@@ -1,18 +1,16 @@
-import { useContext } from 'react';
-import { CartContext } from '../../context/cart';
+import { Fragment } from 'react';
+import { useSelector } from 'react-redux';
+import { selectCart } from '../../store/cart/cartSelectors';
+import CheckoutItem from '../../components/CheckoutItem';
 import {
   Table,
-  Row,
   RowHeader,
   LastRow,
-  Total,
-  Control,
-  Image
+  Total
 } from './index.styles.jsx';
 
 const Checkout = () => {
-  const { cart, addItemToCart, removeItemToCart } = useContext(CartContext);
-
+  const cart = useSelector(selectCart);
   const products = [...cart.values()];
   let totalPrice = 0;
 
@@ -27,22 +25,14 @@ const Checkout = () => {
           <p>Remove</p>
         </RowHeader>
         {products.map((product) => {
-          const {id, name, imageUrl, quantity, price} = product;
-          totalPrice += (price * quantity);
+          const { price, quantity } = product;
 
-          return <Row key={id}>
-            <div>
-              <Image src={imageUrl} alt={name} />
-            </div>
-            <p>{name}</p>
-            <p> 
-              <Control onClick={() => removeItemToCart(id)}> {'< '} </Control> 
-              {quantity} 
-              <Control onClick={() => addItemToCart(product)}>  {' >'} </Control>
-            </p>
-            <p>${price * quantity}</p>
-            <Control as='p' onClick={() => removeItemToCart(id, true)}>X</Control>
-          </Row>
+          totalPrice += (price * quantity);
+          return (
+            <Fragment key={product.id}>
+              <CheckoutItem cart={cart} product={product}/>
+            </Fragment>
+          )   
         })}
         <LastRow>
           <Total>Total: ${totalPrice}</Total>

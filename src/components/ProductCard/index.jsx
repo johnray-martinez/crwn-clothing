@@ -1,5 +1,6 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addItemToCart } from '../../store/cart/cartActions.js';
+import { selectCart } from '../../store/cart/cartSelectors.js'; 
 import { 
   Card,
   Overlay,
@@ -12,8 +13,10 @@ const ProductCard = (props) => {
   const { name, imageUrl, price} = props.product;
   const dispatch = useDispatch();
 
+  const cart = useSelector(selectCart);
+
   const addToCart = () => {
-    dispatch(addItemToCart(props.product));
+    dispatch(addItemToCart(cart, props.product));
   }
 
   return(
