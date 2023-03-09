@@ -8,32 +8,35 @@ const updateCart = (itemToAdd) => {
 }
 
 export const addItemToCart = (productsInCart, itemToAdd) => {
-  const newMap = new Map(productsInCart);
+  const cartCopy = [...productsInCart];
   const { id } = itemToAdd;
+  const existingProduct = cartCopy.find(product => product.id === id);
 
-  if (newMap.has(id)) {
-    const product = newMap.get(id);
-    product.quantity++;
+  if (existingProduct) {
+    existingProduct.quantity++;
   } else {
-    newMap.set(id, { ...itemToAdd, quantity: 1 })
+    cartCopy.push({ ...itemToAdd, quantity: 1 }) 
   }
   
-  return updateCart(newMap);
+  return updateCart(cartCopy);
 }
 
-export const removeItemFromCart = (cart, id, removeAll = false) =>{
-  if (!cart.has(id)) return;
-  const newMap = new Map(cart);
+export const removeItemFromCart = (cart, id, removeAll = false) => {
+  const existingProductIndex = cart.findIndex((product) => product.id === id);
+
+  if (existingProductIndex < 0) return; // nothing to delete
+
+  const cartCopy = [...cart];
 
   if (removeAll) {
-    newMap.delete(id);
+    cartCopy.splice(existingProductIndex, 1);
   } else {
-    const product = newMap.get(id);
+    const product = cartCopy[existingProductIndex];
 
-    product.quantity === 1 ? newMap.delete(id) : product.quantity--;
+    product.quantity === 1 ? delete cartCopy[id] : product.quantity--;
   }
 
-  return updateCart(newMap);
+  return updateCart(cartCopy);
 }
 
 export const setShowDropdown = (value) => {

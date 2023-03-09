@@ -52,7 +52,7 @@ const Navigation = () => {
           <ShoppingCartIcon itemCount={totalItemsInCart}/>
         </NavigationLinksContainer>   
         { showDropdown && <ShoppingCartDropdown 
-        productList={[...cart.values()]} /> }
+        productList={cart} /> }
       </NavigationContainer>
     <Outlet />
   </Fragment>

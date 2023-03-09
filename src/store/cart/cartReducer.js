@@ -1,7 +1,7 @@
 import { CART_ACTION_TYPES } from './cartActionTypes';
 
 const INITIAL_STATE = {
-  cart: new Map(), 
+  cart: [], 
   showDropdown: false
 }
 

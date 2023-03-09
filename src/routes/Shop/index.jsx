@@ -14,7 +14,7 @@ const Shop = () => {
     const getCategoriesMap = async () => {
       const categoriesMap = await getCategoriesAndDocuments();
       
-      dispatch(setCategories(categoriesMap));
+      dispatch(setCategories(categoriesMap));    
     }
 
     getCategoriesMap();

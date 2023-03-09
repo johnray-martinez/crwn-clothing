@@ -4,7 +4,7 @@ export const selectCartReducer = (state) => state.cart;
 
 export const selectCart = createSelector(
   [selectCartReducer],
-  (cartReducer) => cartReducer.cart
+  (cartReducer) => Array.from(Object.values(cartReducer.cart))
 )
 
 export const selectShowDropdown = createSelector(
@@ -15,8 +15,11 @@ export const selectShowDropdown = createSelector(
 export const selectTotalItemsInCart = createSelector(
   [selectCart],
   (cart) => {
-    const cartArray = [...cart.values()];
-    const totalItems = cartArray.reduce((total, currentItem) => total + currentItem.quantity, 0);
+
+    let totalItems = 0;
+    const cartArray = cart;
+    
+    totalItems = cartArray.reduce((total, currentItem) => total + currentItem.quantity, 0);
     
     return totalItems;
   }
