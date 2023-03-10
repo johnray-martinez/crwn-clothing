@@ -7,7 +7,7 @@ import Authentication from './routes/Authentication';
 import Shop from './routes/Shop';
 import Contact from './routes/Contact';
 import Checkout from './routes/Checkout';
-import { setCurrentUser } from './store/user/userAction';
+import { setCurrentUser } from './store/user/userReducer';
 import { 
   onAuthStateChangedListener, 
   createUserDocumentFromAuth 
@@ -22,7 +22,10 @@ const App = () => {
       if (user) {
         createUserDocumentFromAuth(user);
       }
-      dispatch(setCurrentUser(user));
+
+      const pickedUser = user && (({ accessToken, email }) => ({ accessToken, email }))(user)
+      console.log(pickedUser)
+      dispatch(setCurrentUser(pickedUser));
     })
 
     return unsubscribe;

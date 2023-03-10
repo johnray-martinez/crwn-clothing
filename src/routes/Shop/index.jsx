@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import CategoryPreview from '../../components/CategoryPreview';
 import CategoryCatalogue from '../../components/CategoryCatalogue';
 import { getCategoriesAndDocuments} from '../../utils/firebase/firebase'
-import { setCategories } from '../../store/categories/categoryAction';
+import { setCategories } from '../../store/categories/categoryReducer';
 import {  Container } from './index.styles';
 
 const Shop = () => {
