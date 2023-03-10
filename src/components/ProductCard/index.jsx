@@ -1,6 +1,6 @@
-import { useContext } from 'react';
+import { useDispatch } from 'react-redux';
+import { addItemToCart } from '../../store/cart/cartReducer';
 
-import { CartContext } from '../../context/cart';
 import { 
   Card,
   Overlay,
@@ -10,11 +10,11 @@ import {
 } from './index.styles.jsx';
 
 const ProductCard = (props) => {
-  const { addItemToCart } = useContext(CartContext);
   const { name, imageUrl, price} = props.product;
+  const dispatch = useDispatch();
 
   const addToCart = () => {
-    addItemToCart(props.product);
+    dispatch(addItemToCart(props.product));
   }
 
   return(

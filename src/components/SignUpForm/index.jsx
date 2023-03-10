@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { redirect } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { signUpUserAsync } from '../../store/user/userThunks';
 import { createUserDocumentWithEmailAndPassword, createUserDocumentFromAuth } from '../../utils/firebase/firebase';
 import FormField from '../FormField';
 import CustomButton from '../CustomButton';
@@ -13,6 +15,7 @@ const SignUpForm = ({className}) => {
   }
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { displayName, email, password, confirmPassword } = formFields;
+  const dispatch = useDispatch();
 
   const changeHandler = (event) => {
     const {name, value} = event.target;
@@ -28,15 +31,7 @@ const SignUpForm = ({className}) => {
       return;
     }
 
-    try {
-      const {user} = await createUserDocumentWithEmailAndPassword(email, password);
-      await createUserDocumentFromAuth({...user, displayName});
-
-      return redirect('/');
-
-    } catch (err) {
-      console.error(err.message);
-    }
+    dispatch(signUpUserAsync(formFields));
   }
 
   return(

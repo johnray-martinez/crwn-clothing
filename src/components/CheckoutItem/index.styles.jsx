@@ -1,5 +1,21 @@
 import styled from 'styled-components';
 
+export const Control = styled.span`
+  cursor: pointer;
+  font-weight: 700;
+  transition: 0.3s;
+
+  &:hover {
+    color: red;
+  }
+`;
+
+export const Image = styled.img`
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+`;
+
 export const Row = styled.div`
   display: flex;
   grid-gap: 12px;
@@ -16,24 +32,4 @@ export const Row = styled.div`
     display: flex;
     justify-content: center;
   }
-`;
-
-export const Table = styled.div`
-  width: 70%;
-  margin: 0 auto;
-`;
-
-export const RowHeader = styled(Row)`
-  font-size: 18px;
-  font-weight: 700;
-`;
-
-export const LastRow = styled(Row)`
-  border: none;
-  justify-content: flex-end;
-`;
-
-export const Total = styled.p`
-  font-size: 32px;
-  font-weight: 700;
 `;

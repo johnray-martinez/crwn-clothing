@@ -1,11 +1,16 @@
-import { Fragment, useContext } from 'react';
+import { Fragment } from 'react';
 import { ReactComponent as CrownLogo } from '../../assets/logos/crown.svg';
 import { Outlet, Link } from 'react-router-dom';
-import { UserContext } from '../../context/user';
-import { signOutUser } from '../../utils/firebase/firebase';
+import { useSelector, useDispatch } from 'react-redux';
+import { signOutUserAsync } from '../../store/user/userThunks';
 import ShoppingCartIcon from '../../components/ShoppingCartIcon';
 import ShoppingCartDropdown from '../../components/ShoppingCartDropdown';
-import { CartContext } from '../../context/cart';
+import { selectCurrentUser } from '../../store/user/userSelectors';
+import { 
+  selectShowDropdown,
+  selectCart,
+  selectTotalItemsInCart
+ } from '../../store/cart/cartSelectors';
 
 import { 
   NavigationContainer,
@@ -13,12 +18,15 @@ import {
   NavigationLink
  } from './index.styles';
 
-const Navigation = () => {
-  const { currentUser } = useContext(UserContext);
-  const { cart, totalItemsInCart, showDropdown } = useContext(CartContext);
-  
+const Navigation = () => { 
+  const currentUser = useSelector(selectCurrentUser);
+  const showDropdown = useSelector(selectShowDropdown);
+  const cart = useSelector(selectCart);
+  const totalItemsInCart = useSelector(selectTotalItemsInCart);
+  const dispatch = useDispatch();
+
   const signOutHandler = async () => {
-    await signOutUser();
+    dispatch(signOutUserAsync());
   }
 
   return (
@@ -44,7 +52,8 @@ const Navigation = () => {
           }
           <ShoppingCartIcon itemCount={totalItemsInCart}/>
         </NavigationLinksContainer>   
-        { showDropdown && <ShoppingCartDropdown productList={[...cart.values()]} /> }
+        { showDropdown && <ShoppingCartDropdown 
+        productList={cart} /> }
       </NavigationContainer>
     <Outlet />
   </Fragment>
