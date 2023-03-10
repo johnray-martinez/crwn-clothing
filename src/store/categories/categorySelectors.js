@@ -17,6 +17,10 @@ export const selectCategoriesArray = createSelector(
       return acc;
     }, {})
   }
-   
+)
+
+export const selectIsLoading = createSelector(
+  [selectCategoryReducer],
+  (categoryReducer) => categoryReducer.isLoading
 )
   

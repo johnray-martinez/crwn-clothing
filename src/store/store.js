@@ -1,11 +1,14 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { rootReducer } from './root-reducer';
 import storage from 'redux-persist/lib/storage';
-import { combineReducers } from 'redux';
 import { persistReducer, persistStore } from 'redux-persist';
 import logger from 'redux-logger';
+import thunk from 'redux-thunk';
 
-const middlewares = [process.env.NODE_ENV !== 'production' && logger].filter(
+const middlewares = [
+  process.env.NODE_ENV !== 'production' && logger,
+  thunk
+].filter(
   Boolean
 );
 

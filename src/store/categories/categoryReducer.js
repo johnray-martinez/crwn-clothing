@@ -1,16 +1,35 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { getCategoriesAndDocuments } from '../../utils/firebase/firebase';
+
+export const fetchCategoriesAsync = createAsyncThunk(
+  'category/fetchCategoriesAsync',
+  async () => await getCategoriesAndDocuments()
+)
 
 const INITIAL_STATE = {
-  categoriesMap: []
+  categoriesMap: [],
+  isLoading: false,
+  error: null
 }
 
 const categorySlice = createSlice({
   name: 'category',
   initialState: INITIAL_STATE, 
-  reducers: {
-    setCategories(state, action) {
-      state.categoriesMap = action.payload
-    }
+  reducers: {},
+  extraReducers: (builder) => {
+    builder.addCase(fetchCategoriesAsync.fulfilled, (state, { payload }) => {
+      state.categoriesMap = payload;
+      state.isLoading = false;
+    })
+
+    builder.addCase(fetchCategoriesAsync.rejected, (state, { payload }) => {
+      state.error = payload;
+      state.isLoading = false;
+    })
+
+    builder.addCase(fetchCategoriesAsync.pending, (state, _) => {
+      state.isLoading = true;
+    })
   }
 });
 

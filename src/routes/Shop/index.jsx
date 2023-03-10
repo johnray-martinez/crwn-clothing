@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import CategoryPreview from '../../components/CategoryPreview';
 import CategoryCatalogue from '../../components/CategoryCatalogue';
 import { getCategoriesAndDocuments} from '../../utils/firebase/firebase'
-import { setCategories } from '../../store/categories/categoryReducer';
+import { fetchCategoriesAsync } from '../../store/categories/categoryReducer';
 import {  Container } from './index.styles';
 
 const Shop = () => {
@@ -14,7 +14,7 @@ const Shop = () => {
     const getCategoriesMap = async () => {
       const categoriesMap = await getCategoriesAndDocuments();
       
-      dispatch(setCategories(categoriesMap));    
+      dispatch(fetchCategoriesAsync(categoriesMap));    
     }
 
     getCategoriesMap();
