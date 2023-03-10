@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import { removeItemFromCart, addItemToCart } from '../../store/cart/cartActions';
+import { removeItemFromCart, addItemToCart } from '../../store/cart/cartReducer';
 import {
   Row,
   Control,
@@ -11,15 +11,15 @@ const CheckoutItem = ({product, cart}) => {
   const dispatch = useDispatch();
 
   const addToCart = () => {
-    dispatch(addItemToCart(cart, product));
+    dispatch(addItemToCart(product));
   }
 
   const removeFromCart = () => {
-    dispatch(removeItemFromCart(cart, id));
+    dispatch(removeItemFromCart({ id }));
   }
 
   const clearFromCart = () => {
-    dispatch(removeItemFromCart(cart, id, true));
+    dispatch(removeItemFromCart({ id, removeAll: true }));
   }
 
   return (

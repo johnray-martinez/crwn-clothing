@@ -1,26 +1,59 @@
-import { CART_ACTION_TYPES } from './cartActionTypes';
+import { createSlice } from '@reduxjs/toolkit';
 
 const INITIAL_STATE = {
   cart: [], 
   showDropdown: false
 }
 
-export const cartReducer = (state = INITIAL_STATE, action) => {
-  const { type, payload } = action;
+export const cartSlice = createSlice({
+  name: 'cart', 
+  initialState: INITIAL_STATE,
+  reducers: {
+    setShowDropdown(state, { payload }) {
+      state.showDropdown = payload
+    },
+    addItemToCart(state, { payload }) {
+      const cartCopy = [...state.cart];
+      const { id } = payload;
+      const existingProduct = cartCopy.find(product => product.id === id);
 
-  switch (type) {
-    case CART_ACTION_TYPES.UPDATE_CART: {
-      return {
-        ...state,
-        cart: payload
+      if (existingProduct) {
+        existingProduct.quantity++;
+      } else {
+        cartCopy.push({ ...payload, quantity: 1 }) 
       }
+      
+      state.cart = cartCopy;
+    },
+    removeItemFromCart(state, { payload }) {
+      const { id, removeAll } = payload;
+      const cart = state.cart;
+      
+      const existingProductIndex = cart.findIndex((product) => product.id === id);
+
+      if (existingProductIndex < 0) return; // nothing to delete
+
+      const cartCopy = [...cart];
+
+      if (removeAll) {
+        cartCopy.splice(existingProductIndex, 1);
+      } else {
+        const product = cartCopy[existingProductIndex];
+        
+        product.quantity === 1 
+        ? cartCopy.splice(existingProductIndex, 1) 
+        : product.quantity--;
+      }
+
+      state.cart = cartCopy;
     }
-
-    case CART_ACTION_TYPES.TOGGLE_DROPDOWN:
-      return {
-        ...state,
-        showDropdown: payload
-      }
-    default: return state;
   }
-}
+})
+
+export const { 
+  updateCart, 
+  setShowDropdown, 
+  addItemToCart,
+  removeItemFromCart
+} = cartSlice.actions;
+export const cartReducer = cartSlice.reducer;

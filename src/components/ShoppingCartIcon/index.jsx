@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { selectShowDropdown } from '../../store/cart/cartSelectors';
-import { setShowDropdown } from '../../store/cart/cartActions';
+import { setShowDropdown } from '../../store/cart/cartReducer';
 import {
   IconContainer,
   Icon,
