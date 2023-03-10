@@ -15,7 +15,7 @@ const middlewares = [
 const persistConfig = {
   key: 'counter',
   storage,
-  blacklist: ['user']
+  blacklist: ['user', 'category']
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
