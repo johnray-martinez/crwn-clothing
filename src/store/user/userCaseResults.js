@@ -1,4 +1,4 @@
-const retrieveEmailAndAccessToken = (({ accessToken, email }) => ({ accessToken, email }))
+const retrieveEmailAndAccessToken = (({ accessToken, email, displayName }) => ({ accessToken, email, displayName }))
 
 const rejected = (state, { error }) => {
   state.error = error.message;

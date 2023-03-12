@@ -51,4 +51,20 @@ export const Button = styled.button`
       default: return ``
     }
   }}
+
+  ${({ disabled }) => {
+    if (disabled) {
+      return`
+        background-color: gray;
+        border: 1px solid gray;
+        pointer-events: none;
+        cursor: none;
+        
+        &:hover {
+          background-color: gray;
+        }
+      `
+    }
+  }}
+
 `;

@@ -1,12 +1,14 @@
-import { Fragment } from 'react';
 import { useSelector } from 'react-redux';
+
 import { selectCart } from '../../store/cart/cartSelectors';
+import PaymentForm from '../../components/PaymentForm';
 import CheckoutItem from '../../components/CheckoutItem';
 import {
   Table,
   RowHeader,
   LastRow,
-  Total
+  Total,
+  Row
 } from './index.styles.jsx';
 
 const Checkout = () => {
@@ -29,14 +31,15 @@ const Checkout = () => {
 
           totalPrice += (price * quantity);
           return (
-            <Fragment key={product.id}>
+            <Row key={product.id}>
               <CheckoutItem cart={cart} product={product}/>
-            </Fragment>
+            </Row>
           )   
         })}
         <LastRow>
           <Total>Total: ${totalPrice}</Total>
         </LastRow>
+        <PaymentForm />
       </Table>
     </main>
   );

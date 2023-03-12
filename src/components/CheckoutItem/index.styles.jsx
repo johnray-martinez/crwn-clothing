@@ -15,21 +15,3 @@ export const Image = styled.img`
   width: 100%;
   object-fit: cover;
 `;
-
-export const Row = styled.div`
-  display: flex;
-  grid-gap: 12px;
-  border-bottom: 2px solid black;
-  padding: 24px 0;
-  align-items: center;
-
-  > * {
-    flex-basis: 20%;
-  }
-
-  > *:not(:nth-of-type(1)),
-  > *:not(:nth-of-type(2)){
-    display: flex;
-    justify-content: center;
-  }
-`;

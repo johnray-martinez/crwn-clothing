@@ -25,3 +25,15 @@ export const selectTotalItemsInCart = createSelector(
   }
 )
 
+export const selectTotalAmountOfItemsInCart = createSelector(
+  [selectCart],
+  (cart) => {
+    let totalPrice = 0;
+    const cartArray = cart;
+    
+    totalPrice = cartArray.reduce((total, currentItem) => total + currentItem.price * currentItem.quantity, 0);
+    
+    return totalPrice;
+  }
+)
+

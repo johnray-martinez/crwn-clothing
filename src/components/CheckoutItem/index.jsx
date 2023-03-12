@@ -1,7 +1,8 @@
 import { useDispatch } from 'react-redux';
+import { Fragment } from 'react';
+
 import { removeItemFromCart, addItemToCart } from '../../store/cart/cartReducer';
 import {
-  Row,
   Control,
   Image,
 } from './index.styles';
@@ -23,7 +24,7 @@ const CheckoutItem = ({product, cart}) => {
   }
 
   return (
-    <Row key={id}>
+    <Fragment key={id}>
       <div>
         <Image src={imageUrl} alt={name} />
       </div>
@@ -35,7 +36,7 @@ const CheckoutItem = ({product, cart}) => {
       </p>
       <p>${price * quantity}</p>
       <Control as='p' onClick={clearFromCart}>X</Control>
-    </Row>
+    </Fragment>
   )
 }
 
