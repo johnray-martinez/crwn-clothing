@@ -36,4 +36,5 @@ export const LastRow = styled(Row)`
 export const Total = styled.p`
   font-size: 32px;
   font-weight: 700;
+  white-space: nowrap;
 `;

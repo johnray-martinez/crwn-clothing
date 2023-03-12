@@ -1,8 +1,6 @@
 import { useState } from 'react';
-import { redirect } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { signUpUserAsync } from '../../store/user/userThunks';
-import { createUserDocumentWithEmailAndPassword, createUserDocumentFromAuth } from '../../utils/firebase/firebase';
 import FormField from '../FormField';
 import CustomButton from '../CustomButton';
 
