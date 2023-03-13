@@ -1,4 +1,4 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore, Middleware } from '@reduxjs/toolkit';
 import { rootReducer } from './root-reducer';
 import storage from 'redux-persist/lib/storage';
 import { persistReducer, persistStore } from 'redux-persist';
@@ -8,15 +8,15 @@ import thunk from 'redux-thunk';
 const middlewares = [
   process.env.NODE_ENV !== 'production' && logger,
   thunk
-].filter(
-  Boolean
-);
+].filter((middleware): middleware is Middleware => Boolean(middleware));
 
 const persistConfig = {
   key: 'counter',
   storage,
   blacklist: ['user', 'category']
 };
+
+export type RootState = ReturnType<typeof rootReducer>;
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 

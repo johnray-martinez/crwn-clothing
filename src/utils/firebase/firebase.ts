@@ -6,18 +6,20 @@ import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   signOut,
-  onAuthStateChanged
+  onAuthStateChanged,
+  User
 } from 'firebase/auth';
 import {
   getFirestore,
   doc,
   getDoc,
   setDoc,
-  writeBatch,
   collection,
   query,
-  getDocs
+  getDocs,
+  writeBatch
 } from 'firebase/firestore';
+import { Category } from '../../store/categories/categoryTypes';
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -49,8 +51,14 @@ export const db = getFirestore();
 // COLLECTIONS
 const categoriesCollection = collection(db, 'categories');
 
+// TYPE
+export type ObjectToAdd = {
+  title: string
+}
 // db population
-export const addCollectionAndDocuments = async (collectionKey, objectsToAdd) => {
+export const addCollectionAndDocuments = async <T extends ObjectToAdd>(
+  collectionKey: string, 
+  objectsToAdd: T[]): Promise<void> => {
   const collectionRef = collection(db, collectionKey);
   const batch = writeBatch(db);
 
@@ -63,16 +71,16 @@ export const addCollectionAndDocuments = async (collectionKey, objectsToAdd) => 
   console.log('done');
 }
 
-export const getCategoriesAndDocuments = async () => {
+export const getCategoriesAndDocuments = async (): Promise<Category[]> => {
   const q = query(categoriesCollection);
   const querySnapshot = await getDocs(q);
-  return querySnapshot.docs.map((snapshot) => snapshot.data());
+  return querySnapshot.docs.map((snapshot) => snapshot.data() as Category);
 }
 
 export const signInWithGooglePopup = () => signInWithPopup(auth, googleProvider);
 
-export const createUserDocumentFromAuth = async (userAuth) => {
-  const userDocRef = doc(db, 'users', userAuth.uid);
+export const createUserDocumentFromAuth = async (userAuth: User) => {
+  const userDocRef = doc(db, 'users');
   const userSnapshot = await getDoc(userDocRef)
 
   if (!userSnapshot.exists()) {
@@ -86,18 +94,20 @@ export const createUserDocumentFromAuth = async (userAuth) => {
         createdAt
       });
     } catch (error) {
-      console.error('error creating the user', error.message);
+      if (error instanceof Error) {
+        console.error('error creating the user', error.message);
+      }
     }
   }
 }
 
-export const createUserDocumentWithEmailAndPassword = async (email, password) => {
+export const createUserDocumentWithEmailAndPassword = async (email: string, password: string) => {
   if (!email || !password) return;
 
   return await createUserWithEmailAndPassword(auth, email, password);
 }
 
-export const signInUserWithEmailAndPassword = async (email, password) => {
+export const signInUserWithEmailAndPassword = async (email: string, password: string) => {
   if (!email || !password) return;
 
   return await signInWithEmailAndPassword(auth, email, password);

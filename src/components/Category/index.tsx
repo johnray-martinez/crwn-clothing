@@ -6,7 +6,13 @@ import {
   Text,
   Title
 } from './index.styles.jsx';
-const Category = ({title, imageUrl, route}) => {
+
+type CategoryProps = {
+  title: string,
+  imageUrl: string,
+  route: string
+}
+const Category = ({title, imageUrl, route}: CategoryProps) => {
   const navigate = useNavigate();
   const onNavigateHandler = () => navigate(route);
   
