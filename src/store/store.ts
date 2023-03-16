@@ -1,4 +1,5 @@
 import { configureStore, Middleware } from '@reduxjs/toolkit';
+import { useDispatch } from 'react-redux';
 import { rootReducer } from './root-reducer';
 import storage from 'redux-persist/lib/storage';
 import { persistReducer, persistStore } from 'redux-persist';
@@ -16,8 +17,6 @@ const persistConfig = {
   blacklist: ['user', 'category']
 };
 
-export type RootState = ReturnType<typeof rootReducer>;
-
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export const store = configureStore({
@@ -26,5 +25,10 @@ export const store = configureStore({
     serializableCheck: false
   }).concat(middlewares)
 });
+
+export type RootState = ReturnType<typeof rootReducer>;
+export type AppDispatch = typeof store.dispatch;
+type DispatchFunc = () => AppDispatch;
+export const useAppDispatch: DispatchFunc = useDispatch
 
 export const persistor = persistStore(store);

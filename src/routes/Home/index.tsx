@@ -1,3 +1,4 @@
+import React from 'react';
 import CategoryList from '../../components/CategoryList';
 import { HomeContainer } from './index.styles';
 

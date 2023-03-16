@@ -1,11 +1,13 @@
+import React from 'react';
 import { Fragment } from 'react';
 import { ReactComponent as CrownLogo } from '../../assets/logos/crown.svg';
 import { Outlet, Link } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { signOutUserAsync } from '../../store/user/userThunks';
 import ShoppingCartIcon from '../../components/ShoppingCartIcon';
 import ShoppingCartDropdown from '../../components/ShoppingCartDropdown';
 import { selectCurrentUser } from '../../store/user/userSelectors';
+import { useAppDispatch } from '../../store/store';
 import { 
   selectShowDropdown,
   selectCart,
@@ -23,7 +25,7 @@ const Navigation = () => {
   const showDropdown = useSelector(selectShowDropdown);
   const cart = useSelector(selectCart);
   const totalItemsInCart = useSelector(selectTotalItemsInCart);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const signOutHandler = async () => {
     dispatch(signOutUserAsync());
