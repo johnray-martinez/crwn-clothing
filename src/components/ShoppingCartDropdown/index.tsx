@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { Product } from '../../store/cart/cartTypes.js';
 
 import {
   Container,
@@ -12,7 +13,11 @@ import {
   EmptyMessage
 } from './index.styles.jsx';
 
-const ShoppingCartDropdown = ({productList}) => {
+type ShoppingCartDropdownProps = {
+  productList: Product[]
+}
+
+const ShoppingCartDropdown = ({ productList }: ShoppingCartDropdownProps) => {
   return(
     <Container>
       <List>

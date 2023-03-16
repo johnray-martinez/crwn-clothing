@@ -4,7 +4,12 @@ import {
   Label
 } from './index.styles.jsx';
 
-const FormField = ({label, ...attributes}) => {
+type FormFieldProps = {
+  label?: string,
+  [attributes: string]: any
+}
+
+const FormField = ({label, ...attributes}: FormFieldProps) => {
   return (
     <FieldContainer>
       <Field {...attributes} />

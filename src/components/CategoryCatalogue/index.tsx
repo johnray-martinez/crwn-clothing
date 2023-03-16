@@ -9,14 +9,14 @@ const CategoryCatalogue = () => {
   const { categorySlug } = useParams();
   const categories = useSelector(selectCategoriesArray);
   const isLoading = useSelector(selectIsLoading);
-  const productsList = categories[categorySlug];
+  const productsList = categories[categorySlug as string];
   
   return(
     <div>
       {isLoading 
       ? <Spinner />
       : productsList && <CategoryRow 
-        title={categorySlug} 
+        title={categorySlug as string} 
         products={productsList} 
       />}
     </div>

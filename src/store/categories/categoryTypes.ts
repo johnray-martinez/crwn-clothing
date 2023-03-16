@@ -1,14 +1,11 @@
+
+import { Product } from '../cart/cartTypes';
+
 export type Category = {
   title: string,
-  items: CategoryItem[]
+  items: Product[]
 }
 
-export type CategoryItem = {
-  id: number, 
-  imageUrl: string,
-  price: number, 
-  name: string
-}
 
 export type CategoryState = {
   categoriesMap: Category[],

@@ -1,15 +1,20 @@
-import { useDispatch } from 'react-redux';
+import { useAppDispatch } from '../../store/store';
 import { Fragment } from 'react';
 
+import { Product } from '../../store/cart/cartTypes';
 import { removeItemFromCart, addItemToCart } from '../../store/cart/cartReducer';
 import {
   Control,
   Image,
 } from './index.styles';
 
-const CheckoutItem = ({product, cart}) => {
+
+type CheckoutItemProps = {
+  product: Product, 
+}
+const CheckoutItem = ({ product }: CheckoutItemProps) => {
   const { id, name, imageUrl, quantity, price } = product;
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const addToCart = () => {
     dispatch(addItemToCart(product));

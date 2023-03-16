@@ -1,10 +1,12 @@
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useState, ChangeEvent, FormEvent } from 'react';
 import { signUpUserAsync } from '../../store/user/userThunks';
 import FormField from '../FormField';
 import CustomButton from '../CustomButton';
+import { useAppDispatch } from '../../store/store';
 
-const SignUpForm = ({className}) => {
+const SignUpForm = ({ className }: {
+  className?: string
+}) => {
   const defaultFormFields = {
     displayName: '',
     email: '',
@@ -13,15 +15,15 @@ const SignUpForm = ({className}) => {
   }
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { displayName, email, password, confirmPassword } = formFields;
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  const changeHandler = (event) => {
+  const changeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     const {name, value} = event.target;
 
     setFormFields({...formFields, [name]: value});
   }
 
-  const submitHandler = async (event) => {
+  const submitHandler = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     if (password !== confirmPassword) {

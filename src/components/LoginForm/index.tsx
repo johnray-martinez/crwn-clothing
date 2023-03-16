@@ -1,5 +1,5 @@
-import { useState } from 'react'; 
-import { useDispatch } from 'react-redux';
+import { useState, ChangeEvent, FormEvent } from 'react'; 
+import { useAppDispatch } from '../../store/store';
 
 import { 
   signInWithEmailAsync,
@@ -12,7 +12,11 @@ import {
   ButtonContainer
 } from './index.styles.jsx';
 
-const LoginForm = ({className}) => {
+type LoginFormProps = {
+  className?: string
+}
+
+const LoginForm = ({ className }: LoginFormProps) => {
   // DEFAULT STATE
   const defaultFieldValues = {
     email: '',
@@ -26,15 +30,15 @@ const LoginForm = ({className}) => {
   const {email, password} = fieldValues;
 
   // HOOKS
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   // HELPERS
-  const changeHandler = (event) => {
+  const changeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     const {name, value} = event.target;
     setFieldValues({...fieldValues, [name]: value});
   }
 
-  const submitHandler = async (event) => {
+  const submitHandler = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     dispatch(signInWithEmailAsync(fieldValues));
   }

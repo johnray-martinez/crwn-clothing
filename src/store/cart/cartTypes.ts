@@ -1,9 +1,9 @@
 export type CartState = {
-  cart: CartItem[], 
+  cart: Product[], 
   showDropdown: boolean
 }
 
-export type CartItem = {
+export type Product = {
   imageUrl: string, 
   id: number, 
   price: number, 

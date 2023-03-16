@@ -1,4 +1,4 @@
-import { useDispatch } from 'react-redux';
+import { useAppDispatch } from '../../store/store';
 import { addItemToCart } from '../../store/cart/cartReducer';
 
 import { 
@@ -8,10 +8,14 @@ import {
   TextContainer,
   StyledButton
 } from './index.styles.jsx';
+import { Product } from '../../store/cart/cartTypes';
 
-const ProductCard = (props) => {
-  const { name, imageUrl, price} = props.product;
-  const dispatch = useDispatch();
+type ProductCardProps = {
+  product: Product
+}
+const ProductCard = (props: ProductCardProps) => {
+  const { name, imageUrl, price } = props.product;
+  const dispatch = useAppDispatch();
 
   const addToCart = () => {
     dispatch(addItemToCart(props.product));

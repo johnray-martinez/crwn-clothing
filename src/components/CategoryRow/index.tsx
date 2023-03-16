@@ -1,10 +1,15 @@
+import { Product } from '../../store/cart/cartTypes';
 import ProductCard from '../ProductCard';
 import {
   Title,
   ProductList
 } from './index.styles.jsx';
 
-const CategoryRow = ({title, products}) => {
+type CategoryRowProps = {
+  title: string, 
+  products: Product[]
+}
+const CategoryRow = ({title, products}: CategoryRowProps) => {
   return (
     <div key={title}>
       <h2>

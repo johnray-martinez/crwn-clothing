@@ -1,5 +1,6 @@
+import React from 'react';
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useAppDispatch } from './store/store';
 import {Routes, Route} from 'react-router-dom';
 import Navigation from './routes/Navigation';
 import Home from './routes/Home';
@@ -11,7 +12,7 @@ import { checkSessionAsync } from './store/user/userThunks';
 import './App.css';
 
 const App = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(checkSessionAsync())

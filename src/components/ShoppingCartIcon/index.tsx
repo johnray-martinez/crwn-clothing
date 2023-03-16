@@ -7,7 +7,11 @@ import {
   Count
 } from './index.styles.jsx';
 
-const ShoppingCartIcon = ({itemCount}) => {
+type ShoppingCartIconProps = {
+  itemCount: number
+}
+
+const ShoppingCartIcon = ({ itemCount }: ShoppingCartIconProps) => {
   const showDropdown = useSelector(selectShowDropdown);
   const dispatch = useDispatch();
 
