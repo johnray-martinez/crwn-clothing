@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { CartState } from './cartTypes';
 
-const INITIAL_STATE = {
+const INITIAL_STATE: CartState = {
   cart: [], 
   showDropdown: false
 }
@@ -51,7 +52,6 @@ export const cartSlice = createSlice({
 })
 
 export const { 
-  updateCart, 
   setShowDropdown, 
   addItemToCart,
   removeItemFromCart

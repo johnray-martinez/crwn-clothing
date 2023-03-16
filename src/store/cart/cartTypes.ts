@@ -1,6 +1,6 @@
 export type CartState = {
   cart: CartItem[], 
-  isLoading: boolean
+  showDropdown: boolean
 }
 
 export type CartItem = {
