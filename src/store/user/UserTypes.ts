@@ -1,11 +1,13 @@
+import { UserCredential } from 'firebase/auth';
+
 export type UserState = {
-  currentUser: User,
+  currentUser: CurrentUser | null,
   isLoading: boolean,
-  error: string
+  error?: string
 }
 
-export type User = {
+export type CurrentUser = {
   email: string, 
-  token: string, 
+  accessToken: string, 
   displayName: string
 }

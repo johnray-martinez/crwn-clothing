@@ -23,12 +23,12 @@ const categorySlice = createSlice({
       state.isLoading = false;
     })
 
-    builder.addCase(fetchCategoriesAsync.rejected, (state, { error }) => {
-      state.error = error.message;
+    builder.addCase(fetchCategoriesAsync.rejected, (state, action) => {
+      state.error = action.error.message;
       state.isLoading = false;
     })
 
-    builder.addCase(fetchCategoriesAsync.pending, (state, _) => {
+    builder.addCase(fetchCategoriesAsync.pending, (state) => {
       state.isLoading = true;
     })
   }

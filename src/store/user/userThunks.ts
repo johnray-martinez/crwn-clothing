@@ -1,4 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import { UserCredential } from 'firebase/auth';
+
 import { 
   getCurrentUser,
   signInUserWithEmailAndPassword,
@@ -16,7 +18,10 @@ export const checkSessionAsync = createAsyncThunk(
 
 export const signInWithEmailAsync = createAsyncThunk(
   'user/signInWithEmailAsync',
-  async ({ email, password }) => await signInUserWithEmailAndPassword(email, password)
+  async ({ email, password }: { 
+      email: string, 
+      password: string
+    }) => await signInUserWithEmailAndPassword(email, password)
 )
 
 export const signInWithGoogleAsync = createAsyncThunk(
@@ -36,8 +41,12 @@ export const signOutUserAsync = createAsyncThunk(
 
 export const signUpUserAsync = createAsyncThunk(
   'user/signUpUserAsync',
-  async ({ email, password, displayName }) => {
-    const { user } = await createUserDocumentWithEmailAndPassword(email, password);
+  async ({ email, password, displayName }: {
+      email: string, 
+      password: string, 
+      displayName: string
+    }) => {
+    const { user } = await createUserDocumentWithEmailAndPassword(email, password) as UserCredential;
     
     await createUserDocumentFromAuth({...user, displayName});
 
