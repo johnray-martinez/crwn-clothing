@@ -10,7 +10,6 @@ import { selectCurrentUser } from '../../store/user/userSelectors';
 import { useAppDispatch } from '../../store/store';
 import { 
   selectShowDropdown,
-  selectCart,
   selectTotalItemsInCart
  } from '../../store/cart/cartSelectors';
 
@@ -23,7 +22,6 @@ import {
 const Navigation = () => { 
   const currentUser = useSelector(selectCurrentUser);
   const showDropdown = useSelector(selectShowDropdown);
-  const cart = useSelector(selectCart);
   const totalItemsInCart = useSelector(selectTotalItemsInCart);
   const dispatch = useAppDispatch();
 
@@ -54,8 +52,7 @@ const Navigation = () => {
           }
           <ShoppingCartIcon itemCount={totalItemsInCart}/>
         </NavigationLinksContainer>   
-        { showDropdown && <ShoppingCartDropdown 
-        productList={cart} /> }
+        { showDropdown && <ShoppingCartDropdown /> }
       </NavigationContainer>
     <Outlet />
   </Fragment>

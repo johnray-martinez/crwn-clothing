@@ -1,6 +1,6 @@
 import { SpinnerOverlay, SpinnerContainer } from './index.styles'
 
-type Spinner = {
+type SpinnerProps = {
   width?: number, 
   height?: number, 
   hasOverlay?: boolean
@@ -10,7 +10,7 @@ const Spinner = ({
   width = 50, 
   height = 50, 
   hasOverlay = true 
-}: Spinner) => {
+}: SpinnerProps) => {
   return(
     hasOverlay 
       ? <SpinnerOverlay>
