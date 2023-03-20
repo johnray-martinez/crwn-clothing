@@ -3,7 +3,6 @@ import CustomButton from '../CustomButton';
 
 export const FormContainer = styled.form`
   height: 100px;
-  width: 500px;
 `;
 
 export const Container = styled.div`

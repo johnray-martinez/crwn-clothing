@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { minWidth } from '../../styles/Generic.styles';
 
 export const Row = styled.div`
   display: flex;
@@ -26,6 +27,11 @@ export const Table = styled.div`
 export const RowHeader = styled(Row)`
   font-size: 18px;
   font-weight: 700;
+  display: none;
+
+  ${minWidth.md} {
+    display: flex;
+  }
 `;
 
 export const LastRow = styled(Row)`
