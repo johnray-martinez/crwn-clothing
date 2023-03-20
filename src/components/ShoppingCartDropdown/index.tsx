@@ -1,40 +1,22 @@
 import { Link } from 'react-router-dom';
-import { Product } from '../../store/cart/cartTypes.js';
-
+import { useSelector } from 'react-redux';
+import { selectCart } from '../../store/cart/cartSelectors';
+import ShoppingCartDropdownItem from '../ShoppingCartDropdownItem';
 import {
   Container,
   List,
-  ListItem,
-  ThumbnailContainer,
-  Thumbnail,
-  TextContainer,  
-  Text,
   CheckoutButton,
   EmptyMessage
 } from './index.styles.jsx';
 
-type ShoppingCartDropdownProps = {
-  productList: Product[]
-}
+const ShoppingCartDropdown = () => {
+  const cart = useSelector(selectCart);
 
-const ShoppingCartDropdown = ({ productList }: ShoppingCartDropdownProps) => {
   return(
     <Container>
       <List>
-        {productList.length ? 
-          productList.map((product, i) => {
-          const {name, quantity, imageUrl, price} = product;
-
-          return <ListItem key={i}>
-            <ThumbnailContainer>
-              <Thumbnail src={imageUrl} alt={name} />
-            </ThumbnailContainer>
-            <TextContainer>
-              <Text>{name}</Text>
-              <Text>{quantity} X ${price}</Text>
-            </TextContainer>
-          </ListItem>
-        })
+        {cart.length ? 
+          cart.map((product) => <ShoppingCartDropdownItem key={product.id} {...product} />)
         : <EmptyMessage>Your cart is empty</EmptyMessage>}
       </List>
       <Link to='/checkout'>

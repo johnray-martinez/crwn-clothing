@@ -1,7 +1,6 @@
 import { useAppDispatch } from '../../store/store';
-import { Fragment } from 'react';
+import { Fragment, memo, useCallback, useMemo } from 'react';
 
-import { Product } from '../../store/cart/cartTypes';
 import { removeItemFromCart, addItemToCart } from '../../store/cart/cartReducer';
 import {
   Control,
@@ -10,23 +9,44 @@ import {
 
 
 type CheckoutItemProps = {
-  product: Product, 
+  id: number, 
+  name: string, 
+  imageUrl: string, 
+  quantity: number, 
+  price: number
 }
-const CheckoutItem = ({ product }: CheckoutItemProps) => {
-  const { id, name, imageUrl, quantity, price } = product;
+
+const CheckoutItem = memo(({ 
+  id, 
+  name, 
+  imageUrl, 
+  quantity, 
+  price 
+}: CheckoutItemProps) => {  
+  
+  const product = useMemo(() => {
+    return {
+      id, 
+      name, 
+      imageUrl, 
+      quantity, 
+      price 
+    }
+  }, [id, name, imageUrl, quantity, price]);
+
   const dispatch = useAppDispatch();
 
-  const addToCart = () => {
+  const addToCart = useCallback(() => {
     dispatch(addItemToCart(product));
-  }
+  }, [dispatch, product])
 
-  const removeFromCart = () => {
+  const removeFromCart = useCallback(() => {
     dispatch(removeItemFromCart({ id }));
-  }
+  }, [dispatch, id])
 
-  const clearFromCart = () => {
+  const clearFromCart = useCallback(() => {
     dispatch(removeItemFromCart({ id, removeAll: true }));
-  }
+  }, [dispatch, id])
 
   return (
     <Fragment key={id}>
@@ -43,6 +63,6 @@ const CheckoutItem = ({ product }: CheckoutItemProps) => {
       <Control as='p' onClick={clearFromCart}>X</Control>
     </Fragment>
   )
-}
+})
 
 export default CheckoutItem;

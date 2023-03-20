@@ -33,7 +33,7 @@ const Checkout = () => {
           totalPrice += (price * quantity);
           return (
             <Row key={product.id}>
-              <CheckoutItem cart={cart} product={product}/>
+              <CheckoutItem {...product} />
             </Row>
           )   
         })}

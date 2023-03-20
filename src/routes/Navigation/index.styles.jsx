@@ -4,9 +4,9 @@ import { Link } from 'react-router-dom';
 export const NavigationContainer = styled.div`
   display: flex;
   justify-content: space-between;
-  padding: 32px 64px;
   align-items: center; 
   position: relative;
+  padding: 18px 0;
 `;
 
 export const NavigationLinksContainer = styled.div`

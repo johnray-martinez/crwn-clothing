@@ -1,7 +1,9 @@
+import { Fragment } from 'react';
 import { useSelector } from 'react-redux'; 
 import { useParams } from 'react-router-dom';
 
 import { selectCategoriesArray, selectIsLoading } from '../../store/categories/categorySelectors';
+
 import CategoryRow from '../CategoryRow';
 import Spinner from '../Spinner';
 
@@ -15,10 +17,14 @@ const CategoryCatalogue = () => {
     <div>
       {isLoading 
       ? <Spinner />
-      : productsList && <CategoryRow 
-        title={categorySlug as string} 
-        products={productsList} 
-      />}
+      : productsList && (
+        <Fragment>
+          <CategoryRow 
+            title={categorySlug as string} 
+            products={productsList} 
+          />
+        </Fragment>
+      )}
     </div>
   );
 }
