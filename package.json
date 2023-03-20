@@ -52,6 +52,7 @@
     ]
   },
   "devDependencies": {
+    "@types/react-helmet": "^6.1.6",
     "@types/redux-logger": "^3.0.9"
   }
 }
